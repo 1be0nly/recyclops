@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Recyclops</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="login_image">Login Image</string>
+    <string name="lupa_password">Lupa Password ?</string>
+    <string name="tidak_punya_akun">Tidak Punya Akun ?</string>
+    <string name="daftar_sekarang">Daftar Sekarang</string>
+    <string name="login">LOGIN</string>
+    <string name="username">Username</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="no_hp">No.HP</string>
+    <string name="jenis_kelamin">Jenis Kelamin</string>
+    <string name="tanggal_lahir">Tanggal Lahir</string>
+</resources>
