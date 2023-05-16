@@ -182,12 +182,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="4dp"
-            android:text="@string/tidak_punya_akun" />
+            android:text="@string/sudah_punya_akun" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/daftar_sekarang" />
+            android:text="@string/login_2" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

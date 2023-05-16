@@ -14,4 +14,6 @@
     <string name="no_hp">No.HP</string>
     <string name="jenis_kelamin">Jenis Kelamin</string>
     <string name="tanggal_lahir">Tanggal Lahir</string>
+    <string name="sudah_punya_akun">Sudah Punya Akun ?</string>
+    <string name="login_2">Login</string>
 </resources>
