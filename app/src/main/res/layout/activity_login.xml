@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout"
+        android:id="@+id/til_login_email"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         app:startIconDrawable="@drawable/ic_email"
         app:endIconMode="clear_text"
@@ -32,6 +32,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edt_login_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
@@ -39,7 +40,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout2"
+        android:id="@+id/til_login_password"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         app:startIconDrawable="@drawable/ic_lock"
         app:endIconMode="password_toggle"
@@ -51,9 +52,10 @@
         android:layout_marginEnd="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
+        app:layout_constraintTop_toBottomOf="@+id/til_login_email">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edt_login_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
@@ -61,16 +63,16 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tv_login_lupa"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:text="@string/lupa_password"
-        app:layout_constraintEnd_toEndOf="@+id/textInputLayout2"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
+        app:layout_constraintEnd_toEndOf="@+id/til_login_password"
+        app:layout_constraintTop_toBottomOf="@+id/til_login_password" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/materialButton"
+        android:id="@+id/btn_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -78,18 +80,18 @@
         android:layout_marginEnd="32dp"
         android:text="@string/login"
         app:cornerRadius="8dp"
-        app:layout_constraintEnd_toEndOf="@+id/textInputLayout2"
-        app:layout_constraintStart_toStartOf="@+id/textInputLayout2"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintEnd_toEndOf="@+id/til_login_password"
+        app:layout_constraintStart_toStartOf="@+id/til_login_password"
+        app:layout_constraintTop_toBottomOf="@+id/tv_login_lupa" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="@+id/materialButton"
-        app:layout_constraintStart_toStartOf="@+id/materialButton"
-        app:layout_constraintTop_toBottomOf="@+id/materialButton">
+        app:layout_constraintEnd_toEndOf="@+id/btn_login"
+        app:layout_constraintStart_toStartOf="@+id/btn_login"
+        app:layout_constraintTop_toBottomOf="@+id/btn_login">
 
         <TextView
             android:layout_width="wrap_content"
@@ -98,6 +100,7 @@
             android:text="@string/tidak_punya_akun" />
 
         <TextView
+            android:id="@+id/tv_login_daftar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/daftar_sekarang" />
