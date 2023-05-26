@@ -30,7 +30,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/textHome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -49,18 +49,20 @@
                 android:layout_marginBottom="16dp"
                 app:cardBackgroundColor="@color/green_primary"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/textView"
-                app:layout_constraintStart_toStartOf="@+id/textView"
-                app:layout_constraintTop_toBottomOf="@+id/textView">
+                app:layout_constraintEnd_toEndOf="@+id/textHome"
+                app:layout_constraintStart_toStartOf="@+id/textHome"
+                app:layout_constraintTop_toBottomOf="@+id/textHome">
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/cv_camera"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:cardBackgroundColor="@color/black">
                     <ImageView
                         android:layout_width="64dp"
                         android:layout_height="64dp"
-                        android:src="@drawable/img_barcode"
+                        android:src="@drawable/ic_camera_alt_24"
                         android:padding="8dp"/>
+
                 </androidx.cardview.widget.CardView>
             </androidx.cardview.widget.CardView>
         </androidx.constraintlayout.widget.ConstraintLayout>
