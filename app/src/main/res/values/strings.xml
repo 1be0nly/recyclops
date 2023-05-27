@@ -20,4 +20,13 @@
     <string name="tahap_pengembangan">Tahap Pengembangan</string>
     <string name="imagepreview">ImagePreview</string>
     <string name="Shutter">shutter</string>
+    <string name="scan_sampah">Scan\nSampah</string>
+    <string name="bank_sampah">Bank\nSampah</string>
+    <string name="poin">Poin</string>
+    <string name="scan_barcode">Scan\nBarcode</string>
+    <string name="cara_pakai">Cara Pakai</string>
+    <string name="pelajari_lebih_lanjut">Pelajari Lebih Lanjut</string>
+    <string name="aplikasi_recyclops">Aplikasi Recyclops</string>
+    <string name="setoran_terakhir">Setoran Terakhir</string>
+    <string name="lihat_semua">Lihat Semua</string>
 </resources>
