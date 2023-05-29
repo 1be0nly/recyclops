@@ -1,6 +1,7 @@
 package com.example.recyclops.ui.home
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
@@ -14,6 +15,9 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.recyclops.R
+import com.example.recyclops.data.SetoranTerakhir
 import com.example.recyclops.databinding.FragmentHomeBinding
 import com.example.recyclops.ui.camera.CameraActivity
 
@@ -24,6 +28,7 @@ class HomeFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+    private val list = ArrayList<SetoranTerakhir>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,6 +45,9 @@ class HomeFragment : Fragment() {
         homeViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
+
+        list.addAll(getListSetoran())
+        showRecyclerList()
 
         if (!allPermissionsGranted()) {
             ActivityCompat.requestPermissions(
@@ -83,6 +91,28 @@ class HomeFragment : Fragment() {
             }
         }
     }
+
+    @SuppressLint("Recycle")
+    private fun getListSetoran():ArrayList<SetoranTerakhir>{
+        val dataName = resources.getStringArray(R.array.data_name)
+        val dataQuantity = resources.getStringArray(R.array.data_quantity)
+        val dataBank = resources.getStringArray(R.array.data_bank)
+        val dataImage = resources.obtainTypedArray(R.array.data_image)
+
+        val listSetoran =ArrayList<SetoranTerakhir>()
+        for (i in dataName.indices){
+            val setoran = SetoranTerakhir(dataName[i], dataQuantity[i], dataBank[i], dataImage.getResourceId(i, -1))
+            listSetoran.add(setoran)
+        }
+        return listSetoran
+    }
+
+    private fun showRecyclerList() {
+        binding.rvHome.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        val listSetoranAdapter = SetoranAdapter(list)
+        binding.rvHome.adapter = listSetoranAdapter
+    }
+
 
     companion object {
         const val CAMERA_X_RESULT = 200

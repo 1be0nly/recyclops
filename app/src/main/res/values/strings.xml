@@ -29,4 +29,36 @@
     <string name="aplikasi_recyclops">Aplikasi Recyclops</string>
     <string name="setoran_terakhir">Setoran Terakhir</string>
     <string name="lihat_semua">Lihat Semua</string>
+
+    <string-array name="data_name">
+        <item>Kardus</item>
+        <item>Plastik</item>
+        <item>Botol Kaca</item>
+        <item>Plastik</item>
+        <item>Styrofoam</item>
+    </string-array>
+
+    <string-array name="data_quantity">
+        <item>1</item>
+        <item>3</item>
+        <item>2</item>
+        <item>1</item>
+        <item>3</item>
+    </string-array>
+
+    <string-array name="data_bank">
+        <item>Bank Sampah Kiaracondong</item>
+        <item>Bank Sampah Pondok Asri</item>
+        <item>Bank Sampah Cibiru</item>
+        <item>Bank Sampah Kiaraconong</item>
+        <item>Bank Sampah Pondok Indah</item>
+    </string-array>
+
+    <string-array name="data_image">
+        <item>@drawable/img_kardus</item>
+        <item>@drawable/img_plastik</item>
+        <item>@drawable/img_botol_kaca</item>
+        <item>@drawable/img_plastik</item>
+        <item>@drawable/img_styrofoam</item>
+    </string-array>
 </resources>
