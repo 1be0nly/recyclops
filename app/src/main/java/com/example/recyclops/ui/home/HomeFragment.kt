@@ -56,6 +56,7 @@ class HomeFragment : Fragment() {
                 REQUEST_CODE_PERMISSIONS
             )
         }
+
         val camera: CardView = binding.cvCamera
         camera.setOnClickListener {
             val intent = Intent(requireActivity(), CameraActivity::class.java)
