@@ -65,4 +65,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_profile">Profile\n</string>
     <string name="image_sampah">Image Sampah\n</string>
+    <string name="profile">Profile</string>
+    <string name="transaksi">Transaksi</string>
+    <string name="nama">Nama</string>
 </resources>

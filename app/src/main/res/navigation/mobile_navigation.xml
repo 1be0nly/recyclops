@@ -12,15 +12,20 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.recyclops.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_transaksi"
+        android:name="com.example.recyclops.ui.dashboard.TransaksiFragment"
+        android:label="@string/transaksi"
+        tools:layout="@layout/fragment_transaksi" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.recyclops.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_poin"
+        android:name="com.example.recyclops.ui.notifications.PoinFragment"
+        android:label="@string/poin"
+        tools:layout="@layout/fragment_poin" />
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.example.recyclops.ui.profile.ProfileFragment"
+        android:label="@string/profile"
+        tools:layout="@layout/fragment_profile" />
 
 </navigation>
