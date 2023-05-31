@@ -30,19 +30,20 @@ class CameraPreviewActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this).get(CameraPreviewViewModel::class.java)
         viewModel.addListTrashScanned(generateFakeData())
 
+//        TODO: ada bug ketika increase dan decrease jumlah trash, ui loncat dan tidak stabil
         showRecylerView(viewModel)
 
         getPicture()
     }
     fun generateFakeData(): List<TrashScanned> {
         return listOf(
-            TrashScanned(1,"Trash 1", 5, R.drawable.img_botol_kaca),
-            TrashScanned(2,"Trash 2", 10, R.drawable.img_kardus),
-            TrashScanned(3,"Trash 3", 7, R.drawable.img_styrofoam),
-            TrashScanned(4,"Trash 4", 3, R.drawable.img_botol_kaca),
-            TrashScanned(5,"Trash 5", 2, R.drawable.img_styrofoam),
-            TrashScanned(6,"Trash 6", 1, R.drawable.img_kardus),
-            TrashScanned(7,"Trash 7", 4, R.drawable.img_styrofoam),
+            TrashScanned(1,"Trash 1", 5,11, R.drawable.img_botol_kaca),
+            TrashScanned(2,"Trash 2", 10,9, R.drawable.img_kardus),
+            TrashScanned(3,"Trash 3", 7,6,R.drawable.img_styrofoam),
+            TrashScanned(4,"Trash 4", 3,15,R.drawable.img_botol_kaca),
+            TrashScanned(5,"Trash 5", 2,10,R.drawable.img_styrofoam),
+            TrashScanned(6,"Trash 6", 1,13,R.drawable.img_kardus),
+            TrashScanned(7,"Trash 7", 4,5,R.drawable.img_styrofoam),
         )
     }
     fun showRecylerView(viewModel: CameraPreviewViewModel) {
@@ -60,8 +61,6 @@ class CameraPreviewActivity : AppCompatActivity() {
 
             adapter.submitList(newList)
             recyclerView.scrollToPosition(scrollPosition)
-
-
         }
     }
 

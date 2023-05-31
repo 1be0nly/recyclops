@@ -5,8 +5,9 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class TrashScanned (
-    val id : Int,
-    val name : String,
+    var id : Int,
+    var name : String,
     var quantity : Int,
-    val imageSampah : Int
+    var point : Int,
+    var imageSampah : Int
 ) : Parcelable

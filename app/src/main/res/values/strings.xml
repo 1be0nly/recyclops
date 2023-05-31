@@ -68,4 +68,9 @@
     <string name="profile">Profile</string>
     <string name="transaksi">Transaksi</string>
     <string name="nama">Nama</string>
+    <string name="trash_name">name</string>
+    <string name="plus">+</string>
+    <string name="minus">-</string>
+    <string name="quantity_trash">quantity</string>
+    <string name="delete">Delete</string>
 </resources>

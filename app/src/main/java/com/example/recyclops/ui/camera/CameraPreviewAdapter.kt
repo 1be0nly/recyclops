@@ -27,7 +27,6 @@ class CameraPreviewAdapter(
         holder.bind(trashScanned, viewModel)
     }
 
-
     override fun getItemCount(): Int {
         return currentList.size
     }
@@ -35,7 +34,9 @@ class CameraPreviewAdapter(
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val nameTextView: TextView = itemView.findViewById(R.id.name)
         private val quantityTextView: TextView = itemView.findViewById(R.id.quantity)
-        private val imageSampahImageView: ImageView = itemView.findViewById(R.id.imageSampah)
+        private val pointTextView: TextView = itemView.findViewById(R.id.tv_poin)
+        private val imageSampahImageView: ImageView = itemView.findViewById(R.id.iv_imageSampah)
+        private val iconDelete : ImageView = itemView.findViewById(R.id.iv_delete_item)
         private val btnPlus : Button = itemView.findViewById(R.id.btn_plus)
         private val btnMinus : Button = itemView.findViewById(R.id.btn_minus)
 
@@ -44,6 +45,12 @@ class CameraPreviewAdapter(
             imageSampahImageView.setImageResource(trashScanned.imageSampah)
             viewModel.scannedTrash.observeForever {
                 quantityTextView.text = trashScanned.quantity.toString()
+                val point = (trashScanned.quantity * trashScanned.point).toString() + " poin"
+                pointTextView.text = point
+            }
+
+            iconDelete.setOnClickListener {
+                viewModel.deleteItem(trashScanned.id)
             }
 
             btnPlus.setOnClickListener {

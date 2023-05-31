@@ -14,11 +14,6 @@ class CameraPreviewViewModel : ViewModel() {
         get() = _scannedTrash
 
 
-    fun addOneTrashScanned(trashScanned: TrashScanned) {
-        val list = _scannedTrash.value?.toMutableList()
-        list?.add(trashScanned)
-        _scannedTrash.value = list!!
-    }
 
     fun addListTrashScanned(listTrashScanned: List<TrashScanned>) {
         _scannedTrash.value = listTrashScanned
@@ -54,6 +49,5 @@ class CameraPreviewViewModel : ViewModel() {
             _scannedTrash.value = list
         }
     }
-
 
 }
