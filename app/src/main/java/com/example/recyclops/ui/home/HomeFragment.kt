@@ -20,6 +20,7 @@ import com.example.recyclops.R
 import com.example.recyclops.data.SetoranTerakhir
 import com.example.recyclops.databinding.FragmentHomeBinding
 import com.example.recyclops.ui.camera.CameraActivity
+import com.example.recyclops.ui.history.HistoryActivity
 
 class HomeFragment : Fragment() {
 
@@ -49,6 +50,10 @@ class HomeFragment : Fragment() {
         list.addAll(getListSetoran())
         showRecyclerList()
 
+        binding.tvHomeSetoran.setOnClickListener{
+            startActivity(Intent(requireContext(), HistoryActivity::class.java))
+        }
+
         if (!allPermissionsGranted()) {
             ActivityCompat.requestPermissions(
                 requireActivity(),
@@ -62,7 +67,6 @@ class HomeFragment : Fragment() {
             val intent = Intent(requireActivity(), CameraActivity::class.java)
             startActivity(intent)
         }
-
         return root
     }
 
