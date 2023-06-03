@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/Recyclops/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1605" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/Recyclops/app/src/main/res/drawable/ic_baseline_login_24.xml" value="0.1" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/Recyclops/app/src/main/res/drawable/ic_camera_alt_24.xml" value="0.1705" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/Recyclops/app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.1705" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/Recyclops/app/src/main/res/drawable/ic_date.xml" value="0.1705" />
@@ -12,6 +13,7 @@
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/Recyclops/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.102" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/Recyclops/app/src/main/res/drawable/ic_launcher_background.xml" value="0.102" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/Recyclops/app/src/main/res/drawable/ic_lock.xml" value="0.1605" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/Recyclops/app/src/main/res/drawable/ic_logout.xml" value="0.1" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/Recyclops/app/src/main/res/drawable/ic_map.xml" value="0.102" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/Recyclops/app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.1605" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/Recyclops/app/src/main/res/drawable/ic_person.xml" value="0.102" />
@@ -23,7 +25,7 @@
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/Recyclops/app/src/main/res/layout/activity_camera.xml" value="0.15885416666666666" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/Recyclops/app/src/main/res/layout/activity_camera_preview.xml" value="0.15885416666666666" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/Recyclops/app/src/main/res/layout/activity_history.xml" value="0.14479166666666668" />
-        <entry key="..\:/Users/Administrator/AndroidStudioProjects/Recyclops/app/src/main/res/layout/activity_login.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/Recyclops/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/Recyclops/app/src/main/res/layout/activity_main.xml" value="0.16485507246376813" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/Recyclops/app/src/main/res/layout/activity_register.xml" value="0.18" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/Recyclops/app/src/main/res/layout/fragment_dashboard.xml" value="0.16485507246376813" />
@@ -37,6 +39,7 @@
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/Recyclops/app/src/main/res/layout/item_setoran_home.xml" value="0.33" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/Recyclops/app/src/main/res/layout/item_trash_scanned.xml" value="0.17300724637681159" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/Recyclops/app/src/main/res/menu/bottom_nav_menu.xml" value="0.22447916666666667" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/Recyclops/app/src/main/res/menu/logout.xml" value="0.14479166666666668" />
       </map>
     </option>
   </component>

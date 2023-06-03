@@ -11,7 +11,7 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="32dp"
@@ -80,8 +80,8 @@
                             app:layout_constraintTop_toTopOf="parent">
 
                             <ImageView
-                                android:layout_width="64dp"
-                                android:layout_height="64dp"
+                                android:layout_width="48dp"
+                                android:layout_height="48dp"
                                 android:padding="8dp"
                                 android:src="@drawable/ic_camera_alt_24" />
                         </androidx.cardview.widget.CardView>
@@ -114,8 +114,8 @@
                             app:layout_constraintTop_toTopOf="parent">
 
                             <ImageView
-                                android:layout_width="64dp"
-                                android:layout_height="64dp"
+                                android:layout_width="48dp"
+                                android:layout_height="48dp"
                                 android:padding="8dp"
                                 android:src="@drawable/ic_map" />
                         </androidx.cardview.widget.CardView>
@@ -147,8 +147,8 @@
                             app:layout_constraintTop_toTopOf="parent">
 
                             <ImageView
-                                android:layout_width="64dp"
-                                android:layout_height="64dp"
+                                android:layout_width="48dp"
+                                android:layout_height="48dp"
                                 android:padding="8dp"
                                 android:src="@drawable/ic_exchange" />
                         </androidx.cardview.widget.CardView>
@@ -180,8 +180,8 @@
                             app:layout_constraintTop_toTopOf="parent">
 
                             <ImageView
-                                android:layout_width="64dp"
-                                android:layout_height="64dp"
+                                android:layout_width="48dp"
+                                android:layout_height="48dp"
                                 android:padding="8dp"
                                 android:src="@drawable/ic_qr" />
                         </androidx.cardview.widget.CardView>

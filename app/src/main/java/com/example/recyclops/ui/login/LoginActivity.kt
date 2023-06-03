@@ -6,12 +6,17 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.lifecycle.ViewModelProvider
 import com.example.recyclops.MainActivity
 import com.example.recyclops.R
 import com.example.recyclops.databinding.ActivityLoginBinding
+import com.example.recyclops.ui.profile.ProfileViewModel
+import com.example.recyclops.ui.register.RegisterActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -37,6 +42,9 @@ class LoginActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
+        val loginViewModel =
+            ViewModelProvider(this).get(LoginViewModel::class.java)
+
         binding.btnLogin.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
@@ -44,6 +52,10 @@ class LoginActivity : AppCompatActivity() {
 
         binding.btnLoginGoogle.setOnClickListener {
             signIn()
+        }
+
+        binding.tvLoginDaftar.setOnClickListener{
+            startActivity(Intent(this, RegisterActivity::class.java))
         }
 
         // Configure Google Sign In
