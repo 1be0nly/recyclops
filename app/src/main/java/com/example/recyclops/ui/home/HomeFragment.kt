@@ -21,6 +21,7 @@ import com.example.recyclops.data.SetoranTerakhir
 import com.example.recyclops.databinding.FragmentHomeBinding
 import com.example.recyclops.ui.camera.CameraActivity
 import com.example.recyclops.ui.history.HistoryActivity
+import com.example.recyclops.ui.maps.MapsActivity
 
 class HomeFragment : Fragment() {
 
@@ -65,6 +66,12 @@ class HomeFragment : Fragment() {
         val camera: CardView = binding.cvCamera
         camera.setOnClickListener {
             val intent = Intent(requireActivity(), CameraActivity::class.java)
+            startActivity(intent)
+        }
+
+        val maps: CardView = binding.cvBankSampah
+        maps.setOnClickListener {
+            val intent = Intent(requireActivity(), MapsActivity::class.java)
             startActivity(intent)
         }
         return root

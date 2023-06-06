@@ -77,4 +77,12 @@
     <string name="batal">Batal</string>
     <string name="konfirmasi">Konfirmasi</string>
     <string name="foto_sampah">Foto Sampah</string>
+
+    <!--Map String-->
+    <string name="title_activity_maps">Maps</string>
+    <string name="normal_type">Normal</string>
+    <string name="satellite_type">Satellite</string>
+    <string name="terrain_type">Terrain</string>
+    <string name="hybrid_type">Hybrid</string>
+
 </resources>
