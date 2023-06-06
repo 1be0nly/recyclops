@@ -90,7 +90,7 @@ class CameraActivity : AppCompatActivity() {
                         Toast.LENGTH_SHORT
                     ).show()
 
-                    val intent = Intent(this@CameraActivity, CameraPreviewActivity::class.java)
+                    val intent = Intent(this@CameraActivity, ImageConfirmationActivity::class.java)
                     intent.putExtra("picture", photoFile)
                     intent.putExtra(
                         "isBackCamera",
@@ -98,7 +98,6 @@ class CameraActivity : AppCompatActivity() {
                     )
                     setResult(HomeFragment.CAMERA_X_RESULT, intent)
                     startActivity(intent)
-
                 }
             }
         )

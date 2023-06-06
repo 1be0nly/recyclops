@@ -77,6 +77,5 @@ class CameraPreviewActivity : AppCompatActivity() {
             rotateFile(file,isBackCamera)
             binding.ivPreviewImage.setImageURI(Uri.fromFile(file))
         }
-
     }
 }

@@ -19,6 +19,9 @@
         android:theme="@style/Theme.Recyclops"
         tools:targetApi="31">
         <activity
+            android:name=".ui.camera.ImageConfirmationActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.history.HistoryActivity"
             android:exported="false" />
         <activity

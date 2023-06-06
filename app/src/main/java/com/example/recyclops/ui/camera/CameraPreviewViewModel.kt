@@ -1,10 +1,17 @@
 package com.example.recyclops.ui.camera
 
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.recyclops.api.ApiConfig
+import com.example.recyclops.api.FileUploadResponse
 import com.example.recyclops.data.TrashScanned
+import okhttp3.MultipartBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 @SuppressLint("NullSafeMutableLiveData")
 class CameraPreviewViewModel : ViewModel() {
@@ -50,4 +57,29 @@ class CameraPreviewViewModel : ViewModel() {
         }
     }
 
+    fun uploadImage(
+        imageMultipartBody: MultipartBody.Part
+    ) {
+        val apiService = ApiConfig().getApiService()
+        val uploadImageRequest = apiService.uploadImage(imageMultipartBody)
+        uploadImageRequest.enqueue(object : Callback<FileUploadResponse> {
+            override fun onResponse(
+                call: Call<FileUploadResponse>,
+                response: Response<FileUploadResponse>
+            ) {
+                val responseBody = response.body()
+                if (response.isSuccessful) {
+                    if (responseBody != null) {
+                        Log.d("Success", responseBody.error.toString())
+                    }
+                } else {
+                    Log.d("Failure", responseBody?.error.toString())
+                }
+            }
+
+            override fun onFailure(call: Call<FileUploadResponse>, t: Throwable) {
+                Log.d("Failure", t.message.toString())
+            }
+        })
+    }
 }
