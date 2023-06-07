@@ -10,16 +10,51 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/iv_gallery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="32dp"
+        app:cardCornerRadius="25dp"
+        app:contentPadding="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            app:srcCompat="@drawable/ic_gallery"/>
+
+    </com.google.android.material.card.MaterialCardView>
 
     <ImageView
         android:id="@+id/iv_shutter"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginBottom="32dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         android:contentDescription="@string/Shutter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/iv_rotate"
+        app:layout_constraintStart_toEndOf="@+id/iv_gallery"
         app:srcCompat="@drawable/ic_camera_alt_24" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/iv_rotate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
+        app:cardCornerRadius="25dp"
+        app:contentPadding="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            app:srcCompat="@drawable/ic_rotate_camera" />
+
+    </com.google.android.material.card.MaterialCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,9 +1,14 @@
 package com.example.recyclops.ui.camera
 
 import android.content.Intent
+import android.net.Uri
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.WindowInsets
+import android.view.WindowManager
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
@@ -12,6 +17,7 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import com.example.recyclops.databinding.ActivityCameraBinding
 import com.example.recyclops.ui.home.HomeFragment
+import com.example.recyclops.ui.utils.uriToFile
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -27,13 +33,30 @@ class CameraActivity : AppCompatActivity() {
         binding = ActivityCameraBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        hideSystemUI()
+
         startCamera()
 
         binding.ivShutter.setOnClickListener {
             takePhoto()
         }
+        binding.ivRotate.setOnClickListener {
+            cameraSelector =
+                if (cameraSelector.equals(CameraSelector.DEFAULT_BACK_CAMERA)) CameraSelector.DEFAULT_FRONT_CAMERA
+                else CameraSelector.DEFAULT_BACK_CAMERA
+            startCamera()
+        }
 
+        binding.ivGallery.setOnClickListener{
+            startGallery()
+        }
 
+    }
+
+    public override fun onResume() {
+        super.onResume()
+        hideSystemUI()
+        startCamera()
     }
 
     private fun startCamera() {
@@ -101,6 +124,45 @@ class CameraActivity : AppCompatActivity() {
                 }
             }
         )
+    }
+
+    private val launcherIntentGallery = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == RESULT_OK) {
+            val selectedImg = result.data?.data as Uri
+            selectedImg.let { uri ->
+                val myFile = uriToFile(uri, this@CameraActivity)
+                val intent = Intent(this@CameraActivity, ImageConfirmationActivity::class.java)
+                intent.putExtra("picture", myFile)
+
+                //TODO : dari gallery masih salah orientasi
+
+                intent.putExtra("isBackCamera", false)
+                startActivity(intent)
+            }
+        }
+    }
+
+    private fun startGallery() {
+        val intent = Intent()
+        intent.action = Intent.ACTION_GET_CONTENT
+        intent.type = "image/*"
+        val chooser = Intent.createChooser(intent, "Choose a Picture")
+        launcherIntentGallery.launch(chooser)
+    }
+
+    private fun hideSystemUI() {
+        @Suppress("DEPRECATION")
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.insetsController?.hide(WindowInsets.Type.statusBars())
+        } else {
+            window.setFlags(
+                WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN
+            )
+        }
+        supportActionBar?.hide()
     }
 
     private fun createPhotoFile(): File {

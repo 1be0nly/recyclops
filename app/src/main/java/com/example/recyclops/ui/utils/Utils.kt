@@ -1,13 +1,29 @@
 package com.example.recyclops.ui.utils
 
+import android.content.ContentResolver
+import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Matrix
-import java.io.ByteArrayOutputStream
-import java.io.File
-import java.io.FileOutputStream
+import android.net.Uri
+import android.os.Environment
+import java.io.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 private const val MAXIMAL_SIZE = 1000000
+
+private const val FILENAME_FORMAT = "dd-MMM-yyyy"
+
+val timeStamp: String = SimpleDateFormat(
+    FILENAME_FORMAT,
+    Locale.US
+).format(System.currentTimeMillis())
+
+fun createCustomTempFile(context: Context): File {
+    val storageDir: File? = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+    return File.createTempFile(timeStamp, ".jpg", storageDir)
+}
 
 fun rotateFile(file: File, isBackCamera: Boolean = false) {
     val matrix = Matrix()
@@ -34,5 +50,20 @@ fun reduceFileImage(file: File): File {
     } while (streamLength > MAXIMAL_SIZE)
     bitmap.compress(Bitmap.CompressFormat.JPEG, compressQuality, FileOutputStream(file))
     return file
+}
+
+fun uriToFile(selectedImg: Uri, context: Context): File {
+    val contentResolver: ContentResolver = context.contentResolver
+    val myFile = createCustomTempFile(context)
+
+    val inputStream = contentResolver.openInputStream(selectedImg) as InputStream
+    val outputStream: OutputStream = FileOutputStream(myFile)
+    val buf = ByteArray(1024)
+    var len: Int
+    while (inputStream.read(buf).also { len = it } > 0) outputStream.write(buf, 0, len)
+    outputStream.close()
+    inputStream.close()
+
+    return myFile
 }
 
