@@ -13,4 +13,7 @@ data class FileUploadResponse(
     @field: SerializedName("wasteType")
     val wasteType: String?,
 
+    @field: SerializedName("confidence")
+    val confidence: Float?
+
 )

@@ -71,6 +71,9 @@ class CameraPreviewViewModel : ViewModel() {
                 if (response.isSuccessful) {
                     if (responseBody != null) {
                         Log.d("Success", responseBody.error.toString())
+                        Log.d("ImageUrl", responseBody.imageUrl.toString())
+                        Log.d("WasteType", responseBody.wasteType.toString())
+                        Log.d("Confidence", responseBody.confidence.toString())
                     }
                 } else {
                     Log.d("Failure", responseBody?.error.toString())

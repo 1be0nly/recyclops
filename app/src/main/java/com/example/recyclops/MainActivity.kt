@@ -12,8 +12,12 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.recyclops.databinding.ActivityMainBinding
 import com.example.recyclops.ui.login.LoginActivity
+import com.firebase.ui.auth.AuthUI
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.ktx.options
 
 class MainActivity : AppCompatActivity() {
 
@@ -27,7 +31,10 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
         R.id.logout -> {
             Firebase.auth.signOut()
-            startActivity(Intent(this, LoginActivity::class.java))
+            AuthUI.getInstance().signOut(this).addOnCompleteListener {
+                LoginActivity().updateUI(null)
+                startActivity(Intent(this, LoginActivity::class.java))
+            }
             true
         }
         else -> super.onOptionsItemSelected(item)

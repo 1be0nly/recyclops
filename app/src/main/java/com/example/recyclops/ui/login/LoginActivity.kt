@@ -113,7 +113,7 @@ class LoginActivity : AppCompatActivity() {
             }
     }
 
-    private fun updateUI(currentUser: FirebaseUser?) {
+    fun updateUI(currentUser: FirebaseUser?) {
         if (currentUser != null) {
             startActivity(Intent(this@LoginActivity, MainActivity::class.java))
             finish()
