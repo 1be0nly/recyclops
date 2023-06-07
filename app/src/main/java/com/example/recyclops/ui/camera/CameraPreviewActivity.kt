@@ -4,9 +4,13 @@ import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.recyclops.R
 import com.example.recyclops.data.TrashScanned
 import com.example.recyclops.databinding.ActivityCameraPreviewBinding
@@ -15,7 +19,6 @@ import java.io.File
 
 class CameraPreviewActivity : AppCompatActivity() {
 
-    private lateinit var viewModel: CameraPreviewViewModel
 
     private lateinit var binding: ActivityCameraPreviewBinding
 
@@ -27,13 +30,26 @@ class CameraPreviewActivity : AppCompatActivity() {
         binding = ActivityCameraPreviewBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel = ViewModelProvider(this).get(CameraPreviewViewModel::class.java)
+        val viewModel = ViewModelProvider(this).get(CameraPreviewViewModel::class.java)
         viewModel.addListTrashScanned(generateFakeData())
 
 //        TODO: ada bug ketika increase dan decrease jumlah trash, ui loncat dan tidak stabil
         showRecylerView(viewModel)
 
-        getPicture()
+        val imageUrl = intent.getStringExtra("imageUrl")
+        Log.d("imageURL", imageUrl.toString())
+        val wasteType = intent.getStringExtra("wasteType")
+        val confidence = intent.getStringExtra("confidence")
+
+        binding.apply {
+            Glide.with(this@CameraPreviewActivity)
+                .load(imageUrl)
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .centerCrop()
+                .into(ivPreviewImage)
+            tvType.text = wasteType
+            tvConfidence.text = confidence
+        }
     }
     fun generateFakeData(): List<TrashScanned> {
         return listOf(
@@ -61,21 +77,6 @@ class CameraPreviewActivity : AppCompatActivity() {
 
             adapter.submitList(newList)
             recyclerView.scrollToPosition(scrollPosition)
-        }
-    }
-
-    private fun getPicture() {
-        val myFile = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            intent.getSerializableExtra("picture", File::class.java)
-        } else {
-            @Suppress("DEPRECATION")
-            intent.getSerializableExtra("picture")
-        } as? File
-        val isBackCamera = intent.getBooleanExtra("isBackCamera", true) as Boolean
-
-        myFile?.let { file ->
-            rotateFile(file,isBackCamera)
-            binding.ivPreviewImage.setImageURI(Uri.fromFile(file))
         }
     }
 }

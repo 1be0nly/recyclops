@@ -5,6 +5,8 @@ import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.example.recyclops.databinding.ActivityImageConfirmationBinding
@@ -41,8 +43,15 @@ class ImageConfirmationActivity : AppCompatActivity() {
                     file.name,
                     requestImageFile
                 )
-                viewModel.uploadImage( imageMultipart)
-                startActivity(intent)
+                viewModel.uploadImage(imageMultipart)
+                Handler(Looper.getMainLooper()).postDelayed({
+                    viewModel.getResult().observe(this){
+                        intent.putExtra("imageUrl", it.imageUrl)
+                        intent.putExtra("wasteType", it.wasteType)
+                        intent.putExtra("confidence", it.confidence.toString())
+                    }
+                    startActivity(intent)
+                }, 1000)
             }else{
                 Toast.makeText(this, "Silahkan Foto Sampah Terlebih Dahulu", Toast.LENGTH_SHORT).show()
             }

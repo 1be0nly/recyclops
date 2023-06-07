@@ -16,6 +16,8 @@ import retrofit2.Response
 @SuppressLint("NullSafeMutableLiveData")
 class CameraPreviewViewModel : ViewModel() {
 
+    val scannedImage = MutableLiveData<FileUploadResponse>()
+
     private var _scannedTrash = MutableLiveData<List<TrashScanned>>()
     val scannedTrash: LiveData<List<TrashScanned>>
         get() = _scannedTrash
@@ -74,6 +76,7 @@ class CameraPreviewViewModel : ViewModel() {
                         Log.d("ImageUrl", responseBody.imageUrl.toString())
                         Log.d("WasteType", responseBody.wasteType.toString())
                         Log.d("Confidence", responseBody.confidence.toString())
+                        scannedImage.postValue(responseBody)
                     }
                 } else {
                     Log.d("Failure", responseBody?.error.toString())
@@ -84,5 +87,9 @@ class CameraPreviewViewModel : ViewModel() {
                 Log.d("Failure", t.message.toString())
             }
         })
+    }
+
+    fun getResult(): LiveData<FileUploadResponse>{
+        return scannedImage
     }
 }
