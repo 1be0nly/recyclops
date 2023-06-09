@@ -6,6 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".ui.camera.ImageConfirmationActivity">
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="parent" />
+
     <ImageView
         android:id="@+id/iv_trash_photo"
         android:layout_width="match_parent"
@@ -33,6 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/batal"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="@+id/btn_cancel"
         app:layout_constraintStart_toStartOf="@+id/btn_cancel"
         app:layout_constraintTop_toBottomOf="@+id/btn_cancel" />
@@ -54,6 +64,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/konfirmasi"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="@+id/btn_confirm"
         app:layout_constraintStart_toStartOf="@+id/btn_confirm"
         app:layout_constraintTop_toBottomOf="@+id/btn_confirm" />

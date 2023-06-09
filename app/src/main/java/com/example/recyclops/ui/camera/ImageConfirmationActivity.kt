@@ -28,12 +28,12 @@ class ImageConfirmationActivity : AppCompatActivity() {
         binding = ActivityImageConfirmationBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel = ViewModelProvider(this).get(CameraPreviewViewModel::class.java)
+        viewModel = ViewModelProvider(this)[CameraPreviewViewModel::class.java]
 
         getPicture()
 
-        binding.btnCancel.setOnClickListener(){ cancel() }
-        binding.btnConfirm.setOnClickListener(){
+        binding.btnCancel.setOnClickListener{ cancel() }
+        binding.btnConfirm.setOnClickListener{
             if (myFile != null){
                 val file = reduceFileImage(myFile as File)
                 val intent = Intent(this, CameraPreviewActivity::class.java)
@@ -51,7 +51,7 @@ class ImageConfirmationActivity : AppCompatActivity() {
                         intent.putExtra("confidence", it.confidence.toString())
                     }
                     startActivity(intent)
-                }, 1000)
+                }, 2000)
             }else{
                 Toast.makeText(this, "Silahkan Foto Sampah Terlebih Dahulu", Toast.LENGTH_SHORT).show()
             }
@@ -65,11 +65,16 @@ class ImageConfirmationActivity : AppCompatActivity() {
             @Suppress("DEPRECATION")
             intent.getSerializableExtra("picture")
         } as? File
-        val isBackCamera = intent.getBooleanExtra("isBackCamera", true) as Boolean
+        val isBackCamera = intent.getBooleanExtra("isBackCamera", true)
+        val isGallery = intent.getBooleanExtra("isGallery", false)
 
         myFile?.let { file ->
-            rotateFile(file,isBackCamera)
-            binding.ivTrashPhoto.setImageURI(Uri.fromFile(file))
+            if(!isGallery){
+                rotateFile(file,isBackCamera)
+                binding.ivTrashPhoto.setImageURI(Uri.fromFile(file))
+            }else{
+                binding.ivTrashPhoto.setImageURI(Uri.fromFile(file))
+            }
         }
     }
 

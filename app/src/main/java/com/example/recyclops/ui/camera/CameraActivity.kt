@@ -42,7 +42,7 @@ class CameraActivity : AppCompatActivity() {
         }
         binding.ivRotate.setOnClickListener {
             cameraSelector =
-                if (cameraSelector.equals(CameraSelector.DEFAULT_BACK_CAMERA)) CameraSelector.DEFAULT_FRONT_CAMERA
+                if (cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA) CameraSelector.DEFAULT_FRONT_CAMERA
                 else CameraSelector.DEFAULT_BACK_CAMERA
             startCamera()
         }
@@ -134,11 +134,8 @@ class CameraActivity : AppCompatActivity() {
             selectedImg.let { uri ->
                 val myFile = uriToFile(uri, this@CameraActivity)
                 val intent = Intent(this@CameraActivity, ImageConfirmationActivity::class.java)
+                intent.putExtra("isGallery", true)
                 intent.putExtra("picture", myFile)
-
-                //TODO : dari gallery masih salah orientasi
-
-                intent.putExtra("isBackCamera", false)
                 startActivity(intent)
             }
         }
