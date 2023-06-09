@@ -84,5 +84,18 @@
     <string name="satellite_type">Satellite</string>
     <string name="terrain_type">Terrain</string>
     <string name="hybrid_type">Hybrid</string>
+    <string name="tukar_voucher_anda">Tukar Voucher Anda</string>
+    <string name="pln">PLN</string>
+    <string name="voucher_pln">Voucher PLN</string>
+    <string name="_66_kwh">66 kwh</string>
+    <string name="_100_poin">100 Poin</string>
+    <string name="gopay">GOPAY</string>
+    <string name="voucher_gopay">Voucher GoPay</string>
+    <string name="rp_100_000">Rp. 100.000</string>
+    <string name="playstore">Playstore</string>
+    <string name="voucher_playstore">Voucher Playstore</string>
+    <string name="logo">Logo</string>
+    <string name="bangkit_2023">Bangkit 2023</string>
+    <string name="copyright">copyright</string>
 
 </resources>

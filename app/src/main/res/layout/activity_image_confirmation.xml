@@ -25,20 +25,28 @@
         app:layout_constraintTop_toTopOf="parent"
         android:contentDescription="@string/foto_sampah" />
 
-    <ImageView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/btn_cancel"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:clickable="true"
-        android:focusable="true"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        app:cardCornerRadius="35dp"
+        app:cardBackgroundColor="@color/red"
         android:layout_marginStart="32dp"
         android:layout_marginBottom="64dp"
-        android:src="@drawable/ic_baseline_remove_circle_24"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:contentDescription="@string/batal" />
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_baseline_cancel_24"/>
+
+    </com.google.android.material.card.MaterialCardView>
+
 
     <TextView
+        android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/batal"
@@ -47,18 +55,25 @@
         app:layout_constraintStart_toStartOf="@+id/btn_cancel"
         app:layout_constraintTop_toBottomOf="@+id/btn_cancel" />
 
-    <ImageView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/btn_confirm"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:clickable="true"
-        android:focusable="true"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="64dp"
-        android:src="@drawable/ic_baseline_check_circle_24"
+        app:cardBackgroundColor="@color/green_primary"
+        app:cardCornerRadius="35dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:contentDescription="@string/konfirmasi" />
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_baseline_check_circle_24"
+            android:contentDescription="@string/konfirmasi" />
+
+    </com.google.android.material.card.MaterialCardView>
 
     <TextView
         android:layout_width="wrap_content"

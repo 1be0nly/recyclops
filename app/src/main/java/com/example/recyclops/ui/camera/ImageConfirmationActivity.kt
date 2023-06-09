@@ -37,7 +37,6 @@ class ImageConfirmationActivity : AppCompatActivity() {
             if (myFile != null){
                 val file = reduceFileImage(myFile as File)
                 val intent = Intent(this, CameraPreviewActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 val requestImageFile = file.asRequestBody("image/jpeg".toMediaType())
                 val imageMultipart: MultipartBody.Part = MultipartBody.Part.createFormData(
                     "image",

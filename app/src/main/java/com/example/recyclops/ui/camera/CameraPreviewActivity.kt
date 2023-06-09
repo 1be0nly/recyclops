@@ -1,21 +1,17 @@
 package com.example.recyclops.ui.camera
 
-import android.net.Uri
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.recyclops.R
+import com.example.recyclops.api.FileUploadResponse
 import com.example.recyclops.data.TrashScanned
 import com.example.recyclops.databinding.ActivityCameraPreviewBinding
-import com.example.recyclops.ui.utils.rotateFile
-import java.io.File
 
 class CameraPreviewActivity : AppCompatActivity() {
 
