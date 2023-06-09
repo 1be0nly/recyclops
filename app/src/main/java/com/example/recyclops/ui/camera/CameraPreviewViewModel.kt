@@ -5,16 +5,18 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import com.example.recyclops.api.ApiConfig
 import com.example.recyclops.api.FileUploadResponse
 import com.example.recyclops.data.TrashScanned
+import com.example.recyclops.repository.TokenPreferences
 import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 @SuppressLint("NullSafeMutableLiveData")
-class CameraPreviewViewModel : ViewModel() {
+class CameraPreviewViewModel (private val pref: TokenPreferences) : ViewModel() {
 
     val scannedImage = MutableLiveData<FileUploadResponse>()
 
@@ -60,10 +62,11 @@ class CameraPreviewViewModel : ViewModel() {
     }
 
     fun uploadImage(
+        token: String,
         imageMultipartBody: MultipartBody.Part
     ) {
         val apiService = ApiConfig().getApiService()
-        val uploadImageRequest = apiService.uploadImage(imageMultipartBody)
+        val uploadImageRequest = apiService.uploadImage(token,imageMultipartBody)
         uploadImageRequest.enqueue(object : Callback<FileUploadResponse> {
             override fun onResponse(
                 call: Call<FileUploadResponse>,
@@ -91,5 +94,9 @@ class CameraPreviewViewModel : ViewModel() {
 
     fun getResult(): LiveData<FileUploadResponse>{
         return scannedImage
+    }
+
+    fun getToken(): LiveData<String> {
+        return pref.getToken().asLiveData()
     }
 }

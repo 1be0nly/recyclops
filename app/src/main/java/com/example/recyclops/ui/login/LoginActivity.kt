@@ -2,6 +2,7 @@ package com.example.recyclops.ui.login
 
 import android.app.Activity
 import android.content.ContentValues.TAG
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -11,10 +12,14 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import com.example.recyclops.MainActivity
 import com.example.recyclops.R
 import com.example.recyclops.databinding.ActivityLoginBinding
+import com.example.recyclops.repository.TokenPreferences
 import com.example.recyclops.ui.profile.ProfileViewModel
 import com.example.recyclops.ui.register.RegisterActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -29,6 +34,8 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
+val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "token")
+
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
@@ -41,9 +48,6 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         supportActionBar?.hide()
-
-        val loginViewModel =
-            ViewModelProvider(this).get(LoginViewModel::class.java)
 
         binding.btnLogin.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
@@ -101,8 +105,12 @@ class LoginActivity : AppCompatActivity() {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "signInWithCredential:success")
                     Toast.makeText(this, "berhasil", Toast.LENGTH_SHORT).show()
+                    val pref = TokenPreferences.getInstance(dataStore)
+                    val loginViewModel = ViewModelProvider(this, LoginViewModelFactory(pref)).get(
+                        LoginViewModel::class.java
+                    )
+                    loginViewModel.saveToken(idToken)
                     val user = auth.currentUser
-                    Log.d("UserToken", idToken)
                     updateUI(user)
                 } else {
                     // If sign in fails, display a message to the user.

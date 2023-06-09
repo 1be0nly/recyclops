@@ -12,6 +12,8 @@ import com.example.recyclops.R
 import com.example.recyclops.api.FileUploadResponse
 import com.example.recyclops.data.TrashScanned
 import com.example.recyclops.databinding.ActivityCameraPreviewBinding
+import com.example.recyclops.repository.TokenPreferences
+import com.example.recyclops.ui.login.dataStore
 
 class CameraPreviewActivity : AppCompatActivity() {
 
@@ -26,7 +28,10 @@ class CameraPreviewActivity : AppCompatActivity() {
         binding = ActivityCameraPreviewBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val viewModel = ViewModelProvider(this).get(CameraPreviewViewModel::class.java)
+        val pref = TokenPreferences.getInstance(dataStore)
+        val viewModel = ViewModelProvider(this, ImageConfirmViewModelFactory(pref)).get(
+            CameraPreviewViewModel::class.java
+        )
         viewModel.addListTrashScanned(generateFakeData())
 
 //        TODO: ada bug ketika increase dan decrease jumlah trash, ui loncat dan tidak stabil

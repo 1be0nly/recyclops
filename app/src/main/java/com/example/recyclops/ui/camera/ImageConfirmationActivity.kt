@@ -3,19 +3,24 @@ package com.example.recyclops.ui.camera
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.recyclops.databinding.ActivityImageConfirmationBinding
+import com.example.recyclops.repository.TokenPreferences
+import com.example.recyclops.ui.login.dataStore
 import com.example.recyclops.ui.utils.reduceFileImage
 import com.example.recyclops.ui.utils.rotateFile
+import com.google.firebase.auth.FirebaseAuth
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
+
 
 class ImageConfirmationActivity : AppCompatActivity() {
 
@@ -28,7 +33,11 @@ class ImageConfirmationActivity : AppCompatActivity() {
         binding = ActivityImageConfirmationBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel = ViewModelProvider(this)[CameraPreviewViewModel::class.java]
+        val pref = TokenPreferences.getInstance(dataStore)
+
+        viewModel = ViewModelProvider(this, ImageConfirmViewModelFactory(pref)).get(
+            CameraPreviewViewModel::class.java
+        )
 
         getPicture()
 
@@ -43,7 +52,23 @@ class ImageConfirmationActivity : AppCompatActivity() {
                     file.name,
                     requestImageFile
                 )
-                viewModel.uploadImage(imageMultipart)
+
+                val mUser = FirebaseAuth.getInstance().currentUser
+                mUser!!.getIdToken(true)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            val idToken: String = task.result.token.toString()
+                            viewModel.uploadImage("Bearer $idToken",imageMultipart)
+                            Log.d("Token", idToken)
+                        } else {
+                            Log.d("token failed", task.exception.toString())
+                        }
+                    }
+
+                //viewModel.getToken().observe(this){token ->
+                    //viewModel.uploadImage("Bearer $token",imageMultipart)
+                    //Log.d("Token", token)
+                //}
                 Handler(Looper.getMainLooper()).postDelayed({
                     viewModel.getResult().observe(this){
                         intent.putExtra("imageUrl", it.imageUrl)
