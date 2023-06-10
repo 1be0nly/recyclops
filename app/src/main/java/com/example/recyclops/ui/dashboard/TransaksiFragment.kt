@@ -54,38 +54,47 @@ class TransaksiFragment : Fragment() {
     private fun showRecyclerList() {
         recyclerView = _binding?.rvTransaksi!!
         layoutManager = LinearLayoutManager(requireContext())
+
         viewModel.dataList.observe(viewLifecycleOwner) { dataList ->
             val adapter = TransaksiAdapter(
-                dataList,
-                onIncreaseQuantity = { position ->
-                    changeDataRV(position, "increase", dataList)
+                onIncreaseQuantity = { id, position ->
+                    viewModel.increaseQuantity(id)
+
                 },
-                onDecreaseQuantity = { position ->
-                    changeDataRV(position, "decrease", dataList)
+                onDecreaseQuantity = { id, position ->
+                    viewModel.decreaseQuantity(id)
+
                 },
-                onDeleteItem = { position ->
-                    changeDataRV(position, "delete", dataList)
+                onDeleteItem = { id, position ->
+                    viewModel.deleteItem(id)
+
                 }
-                )
+            )
+
+            val previousScrollPosition = layoutManager.findFirstCompletelyVisibleItemPosition()
+
             recyclerView.adapter = adapter
+            adapter.submitList(dataList)
+
+            recyclerView.scrollToPosition(previousScrollPosition)
         }
 
         recyclerView.layoutManager = layoutManager
     }
 
-    private fun changeDataRV(position: Int, type: String, dataList: List<TrashScanned>) {
-        val updatedDataList = dataList.toMutableList()
-        if (type == "increase") {
-            updatedDataList[position].quantity++
-            recyclerView.adapter?.notifyItemChanged(position)
-        } else if (type == "decrease") {
-            if (updatedDataList[position].quantity > 0) {
-                updatedDataList[position].quantity--
-            }
-            recyclerView.adapter?.notifyItemChanged(position)
-        } else if (type == "delete") {
-            updatedDataList.removeAt(position)
-            recyclerView.adapter?.notifyItemRemoved(position)
-        }
-    }
+//    private fun changeDataRV(id: Int, position: Int, type: String, dataList: List<TrashScanned>) {
+//        val updatedDataList = dataList.toMutableList()
+//        if (type == "increase") {
+//            updatedDataList[id].quantity++
+//            recyclerView.adapter?.notifyItemChanged(position)
+//        } else if (type == "decrease") {
+//            if (updatedDataList[position].quantity > 0) {
+//                updatedDataList[position].quantity--
+//            }
+//            recyclerView.adapter?.notifyItemChanged(position)
+//        } else if (type == "delete") {
+//            updatedDataList.removeAt(position)
+//            recyclerView.adapter?.notifyItemRemoved(position)
+//        }
+//    }
 }

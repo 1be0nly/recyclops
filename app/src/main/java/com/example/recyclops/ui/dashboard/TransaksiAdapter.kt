@@ -7,16 +7,17 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recyclops.R
 import com.example.recyclops.data.TrashScanned
+import com.example.recyclops.ui.utils.TrashScannedDiffCallback
 
 class TransaksiAdapter(
-    private val dataList: List<TrashScanned>,
-    private val onIncreaseQuantity: (Int) -> Unit,
-    private val onDecreaseQuantity: (Int) -> Unit,
-    private val onDeleteItem: (Int) -> Unit
-) : RecyclerView.Adapter<TransaksiAdapter.ViewHolder>() {
+    private val onIncreaseQuantity: (Int,Int) -> Unit,
+    private val onDecreaseQuantity: (Int,Int) -> Unit,
+    private val onDeleteItem: (Int,Int) -> Unit
+) : ListAdapter<TrashScanned, TransaksiAdapter.ViewHolder>(TrashScannedDiffCallback()) {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val nameTextView: TextView = itemView.findViewById(R.id.name)
@@ -34,17 +35,20 @@ class TransaksiAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val trashScanned = dataList[position]
+        val trashScanned = getItem(position)
+        val id = trashScanned.id
 
         holder.nameTextView.text = trashScanned.name
-        holder.quantityTextView.text = "Quantity: ${trashScanned.quantity}"
-        holder.pointTextView.text = "Poin: ${trashScanned.point * trashScanned.quantity}"
+        holder.quantityTextView.text = "${trashScanned.quantity} Kg"
+        holder.pointTextView.text = "${trashScanned.point * trashScanned.quantity} Poin"
         holder.imageSampahImageView.setImageResource(trashScanned.imageSampah)
 
-        holder.increaseButton.setOnClickListener { onIncreaseQuantity(position) }
-        holder.decreaseButton.setOnClickListener { onDecreaseQuantity(position) }
-        holder.iconDelete.setOnClickListener { onDeleteItem(position) }
+        holder.increaseButton.setOnClickListener { onIncreaseQuantity(id, position) }
+        holder.decreaseButton.setOnClickListener { onDecreaseQuantity(id, position) }
+        holder.iconDelete.setOnClickListener { onDeleteItem(id, position) }
     }
 
-    override fun getItemCount(): Int = dataList.size
+    override fun getItemCount(): Int {
+        return currentList.size
+    }
 }
