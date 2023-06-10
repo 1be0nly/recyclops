@@ -7,11 +7,19 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.recyclops.R
+import com.example.recyclops.data.TrashScanned
 import com.example.recyclops.databinding.FragmentTransaksiBinding
 
 class TransaksiFragment : Fragment() {
 
     private var _binding: FragmentTransaksiBinding? = null
+
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var layoutManager: LinearLayoutManager
+    private lateinit var viewModel: TransaksiViewModel
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -22,21 +30,62 @@ class TransaksiFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val dashboardViewModel =
-            ViewModelProvider(this).get(TransaksiViewModel::class.java)
+        viewModel = ViewModelProvider(this)[TransaksiViewModel::class.java]
 
         _binding = FragmentTransaksiBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textDashboard
-        dashboardViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
+
+        // TODO: ui ngebug dikit
+        showRecyclerList()
+
+//        val textView: TextView = binding.textDashboard
+//        dashboardViewModel.text.observe(viewLifecycleOwner) {
+//            textView.text = it
+//        }
         return root
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun showRecyclerList() {
+        recyclerView = _binding?.rvTransaksi!!
+        layoutManager = LinearLayoutManager(requireContext())
+        viewModel.dataList.observe(viewLifecycleOwner) { dataList ->
+            val adapter = TransaksiAdapter(
+                dataList,
+                onIncreaseQuantity = { position ->
+                    changeDataRV(position, "increase", dataList)
+                },
+                onDecreaseQuantity = { position ->
+                    changeDataRV(position, "decrease", dataList)
+                },
+                onDeleteItem = { position ->
+                    changeDataRV(position, "delete", dataList)
+                }
+                )
+            recyclerView.adapter = adapter
+        }
+
+        recyclerView.layoutManager = layoutManager
+    }
+
+    private fun changeDataRV(position: Int, type: String, dataList: List<TrashScanned>) {
+        val updatedDataList = dataList.toMutableList()
+        if (type == "increase") {
+            updatedDataList[position].quantity++
+            recyclerView.adapter?.notifyItemChanged(position)
+        } else if (type == "decrease") {
+            if (updatedDataList[position].quantity > 0) {
+                updatedDataList[position].quantity--
+            }
+            recyclerView.adapter?.notifyItemChanged(position)
+        } else if (type == "delete") {
+            updatedDataList.removeAt(position)
+            recyclerView.adapter?.notifyItemRemoved(position)
+        }
     }
 }
