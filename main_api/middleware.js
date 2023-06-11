@@ -1,6 +1,8 @@
 const admin = require('firebase-admin');
 
-admin.initializeApp();
+admin.initializeApp({
+    databaseURL: "https://recyclops-prototype-default-rtdb.asia-southeast1.firebasedatabase.app"
+});
 
 const verifyToken = async (req, res, next) => {
   try {
@@ -13,7 +15,7 @@ const verifyToken = async (req, res, next) => {
     
     const idToken = token.split('Bearer ')[1];
     const decodedToken = await admin.auth().verifyIdToken(idToken);
-    req.user = decodedToken;
+    req.user = {email: decodedToken.email};
     next();
 
     

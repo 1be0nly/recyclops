@@ -26,7 +26,9 @@ const uploadImage = async (req, res) => {
         const wasteImage = req.file;
         const wasteWeight = 0;
         const points = 0;
-        const filename = uuidv4() + '.jpg';
+        const uniqueId = uuidv4();
+        const filename = `${uniqueId}.jpg`;
+        res.locals.uniqueId = uniqueId;
 
         await storage.bucket(bucketName).file(filename).save(wasteImage.buffer, {
             metadata: {
@@ -41,17 +43,18 @@ const uploadImage = async (req, res) => {
       return res.status(400).json({error: result.data.error});
     }
 
+        calculatePoint(uniqueId, wasteType);
+
         const classificationResult = result.data.wasteType;
         const confidenceResult = result.data.confidence;
 
-        const userId = req.user.uid;
-        const dbRef = admin.database().ref('users');
-        const userRef = dbRef.child(userId);
+        const userEmail = req.user.email;
+        const dbRef = admin.database().ref('users').child(filterEmail(userEmail)).child(uniqueId);
+        const newData = dbRef.push();
+        await newData.set({imageUrl, weight: wasteWeight, points, wasteType: classificationResult, confidence: confidenceResult,})
 
-        userRef.push({imageUrl, weight: wasteWeight, points, wasteType: classificationResult, confidence: confidenceResult,
-    });
 
-        res.status(200).json({imageUrl, wasteType: classificationResult, confidence: confidenceResult});
+        res.status(200).json({uniqueId, imageUrl, wasteType: classificationResult, confidence: confidenceResult});
   } catch (error) {
         console.error(error);
         res.status(500).json({error: 'Internal server error'});
@@ -61,9 +64,11 @@ const uploadImage = async (req, res) => {
 // POST classified to database
 const calculatePoint = async (req, res) => {
     try {
-      const userId = req.user.uid;
+
+      const userEmail = req.user.email;
       const {wasteType, weight} = req.body;
-  
+      const uniqueId = res.locals.uniqueId;
+        
       let points = 0;
   
       switch (wasteType) {
@@ -89,8 +94,19 @@ const calculatePoint = async (req, res) => {
           points = 0;
       }
   
-      const dbRef = admin.database().ref('users').child(userId);
-      await dbRef.update({weight, points});
+    const dbRef = admin.database().ref('users').child(filterEmail(userEmail)).child(uniqueId);
+    const snapshot = await dbRef.once('value');
+    const userData = snapshot.val();
+
+    const {imageUrl, confidence} = userData;
+
+    await dbRef.update({
+      imageUrl: imageUrl,
+      weight,
+      points,
+      wasteType,
+      confidence: confidence,
+    });
   
       res.status(200).json({points});
     } catch (error) {
@@ -140,5 +156,9 @@ const getPoint = async (req, res) => {
         res.status(500).json({error: 'Internal server error'});
     }
 };
+
+function filterEmail(email) {
+    return email.replace('.', '_').replace('@', '_');
+  }
 
 module.exports = {uploadImage, calculatePoint, getUser, getPoint};
