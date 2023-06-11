@@ -1,11 +1,13 @@
 const express = require('express');
-const {uploadImage, getImage} = require('./handler');
-const {login} = require('./login');
-
 const router = express.Router();
+const multer = require('multer');
+const upload = multer();
+const {verifyToken} = require('./middleware');
+const {uploadImage, calculatePoint,getUser, getPoint} = require('./handler');
 
-router.post('/login', login);
-router.post('/upload', uploadImage);
-router.get('/classified/:imageId', getImage);
+router.post('/upload', verifyToken, upload.single('image'), uploadImage);
+router.post('/postpoint', verifyToken, calculatePoint);
+router.post('/history', verifyToken, getUser);
+router.post('/getpoint', verifyToken, getPoint);
 
 module.exports = router;

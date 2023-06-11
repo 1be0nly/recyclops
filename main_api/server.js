@@ -1,17 +1,12 @@
 const express = require('express');
-const multer = require('multer');
+const app = express();
 const routes = require('./routes');
 
-const app = express();
-const port = process.env.PORT || 8080;
-
-const storage = multer.memoryStorage();
-const upload = multer({storage});
-
 app.use(express.json());
-app.use(upload.single('image'));
-app.use('/api', routes);
 
+app.use('/recyclops', routes);
+
+const port = process.env.PORT || 8080;
 app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+  console.log(`Server listening on port ${port}`);
 });
