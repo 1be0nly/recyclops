@@ -97,5 +97,10 @@
     <string name="logo">Logo</string>
     <string name="bangkit_2023">Bangkit 2023</string>
     <string name="copyright">copyright</string>
+    <string name="gambar_sampah">Gambar Sampah</string>
+    <string name="masukkan_berat">Masukkan Berat Per KG</string>
+    <string name="kirim">Kirim</string>
+    <string name="jenis_sampah">Jenis Sampah</string>
+    <string name="jenis_sampah_2">Jenis Sampah :</string>
 
 </resources>

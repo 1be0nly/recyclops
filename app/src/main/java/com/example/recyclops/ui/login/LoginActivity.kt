@@ -1,14 +1,11 @@
 package com.example.recyclops.ui.login
 
 import android.app.Activity
-import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -16,11 +13,10 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
-import com.example.recyclops.MainActivity
+import com.example.recyclops.ui.main.MainActivity
 import com.example.recyclops.R
 import com.example.recyclops.databinding.ActivityLoginBinding
 import com.example.recyclops.repository.TokenPreferences
-import com.example.recyclops.ui.profile.ProfileViewModel
 import com.example.recyclops.ui.register.RegisterActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount

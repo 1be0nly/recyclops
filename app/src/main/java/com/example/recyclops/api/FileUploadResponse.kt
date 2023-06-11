@@ -7,6 +7,9 @@ data class FileUploadResponse(
     @field: SerializedName("error")
     val error: String?,
 
+    @field: SerializedName("uniqueId")
+    val uniqueId: String?,
+
     @field: SerializedName("imageUrl")
     val imageUrl: String?,
 

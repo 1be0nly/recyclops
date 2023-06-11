@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.camera.CameraPreviewActivity">
+    tools:context=".ui.scan.ScanFragment">
 
     <ImageView
         android:id="@+id/iv_preview_trash"
@@ -62,7 +62,7 @@
         app:layout_constraintTop_toBottomOf="@+id/edt_preview">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tf_preview_weight"
+            android:id="@+id/tf_transaksi_weight"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="number"
@@ -76,6 +76,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/kirim"
+        app:cornerRadius="8dp"
         app:layout_constraintEnd_toEndOf="@+id/til_preview_weight"
         app:layout_constraintStart_toStartOf="@+id/til_preview_weight"
         app:layout_constraintTop_toBottomOf="@+id/til_preview_weight" />

@@ -13,4 +13,13 @@ interface ApiService {
         @Part image: MultipartBody.Part,
     ): Call<FileUploadResponse>
 
+    @FormUrlEncoded
+    @POST("postpoint")
+    fun uploadImageConfirmed(
+        @Header("authorization") token: String,
+        @Field ("uniqueId") uniqueId: String,
+        @Field ("wasteType") wasteType: String,
+        @Field ("weight") weight: Int
+    ): Call<UploadImageConfirmedResponse>
+
 }

@@ -7,9 +7,9 @@
         android:title="@string/title_home" />
 
     <item
-        android:id="@+id/navigation_transaksi"
-        android:icon="@drawable/ic_transaksi"
-        android:title="@string/transaksi" />
+        android:id="@+id/navigation_scan"
+        android:icon="@drawable/ic_qr"
+        android:title="@string/scan_barcode" />
 
     <item
         android:id="@+id/navigation_poin"

@@ -1,4 +1,4 @@
-package com.example.recyclops.ui.notifications
+package com.example.recyclops.ui.poin
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

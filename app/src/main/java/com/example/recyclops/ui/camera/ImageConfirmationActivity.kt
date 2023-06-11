@@ -10,6 +10,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.example.recyclops.api.ResponseInterface
 import com.example.recyclops.databinding.ActivityImageConfirmationBinding
 import com.example.recyclops.repository.TokenPreferences
 import com.example.recyclops.ui.login.dataStore
@@ -28,6 +29,7 @@ class ImageConfirmationActivity : AppCompatActivity() {
     private lateinit var viewModel: CameraPreviewViewModel
     private var myFile: File? = null
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityImageConfirmationBinding.inflate(layoutInflater)
@@ -35,9 +37,7 @@ class ImageConfirmationActivity : AppCompatActivity() {
 
         val pref = TokenPreferences.getInstance(dataStore)
 
-        viewModel = ViewModelProvider(this, ImageConfirmViewModelFactory(pref)).get(
-            CameraPreviewViewModel::class.java
-        )
+        viewModel = ViewModelProvider(this, ImageConfirmViewModelFactory(pref))[CameraPreviewViewModel::class.java]
 
         getPicture()
 
@@ -52,16 +52,15 @@ class ImageConfirmationActivity : AppCompatActivity() {
                     file.name,
                     requestImageFile
                 )
-
                 val mUser = FirebaseAuth.getInstance().currentUser
                 mUser!!.getIdToken(true)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-                            val idToken: String = task.result.token.toString()
-                            viewModel.uploadImage("Bearer $idToken",imageMultipart)
-                            Log.d("Token", idToken)
+                            val idToken: String? = task.result.token
+                            viewModel.uploadImage("Bearer $idToken",imageMultipart,this)
+                            Log.d("token", idToken.toString())
                         } else {
-                            Log.d("token failed", task.exception.toString())
+                            Log.d("Exception", task.exception.toString())
                         }
                     }
 
@@ -72,11 +71,22 @@ class ImageConfirmationActivity : AppCompatActivity() {
                 Handler(Looper.getMainLooper()).postDelayed({
                     viewModel.getResult().observe(this){
                         intent.putExtra("imageUrl", it.imageUrl)
+                        intent.putExtra("uniqueId", it.uniqueId)
                         intent.putExtra("wasteType", it.wasteType)
                         intent.putExtra("confidence", it.confidence.toString())
                     }
                     startActivity(intent)
-                }, 2000)
+                }, 3000)
+
+                //viewModel.getResult().observe(this){
+                        //while (it.imageUrl != null){
+                            //intent.putExtra("imageUrl", it.imageUrl)
+                            //intent.putExtra("wasteType", it.wasteType)
+                            //intent.putExtra("confidence", it.confidence.toString())
+                            //startActivity(intent)
+                            //break
+                    //}
+                //}
             }else{
                 Toast.makeText(this, "Silahkan Foto Sampah Terlebih Dahulu", Toast.LENGTH_SHORT).show()
             }
