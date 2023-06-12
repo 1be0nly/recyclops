@@ -1,32 +1,21 @@
-# # Base image
-# FROM node:16
-
-# # Set the working directory
-# WORKDIR /app
-
-# # Copy package.json and package-lock.json
-# COPY package*.json ./
-
-# # Install dependencies
-# RUN npm install
-
-# # Copy the source code
-# COPY main_api ./main_api
-
-# # Start the application
-# CMD ["node", "./main_api/server.js"]
-
+# Use the official lightweight Python image.
+# https://hub.docker.com/_/python
 FROM python:3.9-slim
 
-WORKDIR /app
+# Allow statements and log messages to immediately appear in the Knative logs
+ENV PYTHONUNBUFFERED True
 
-COPY requirements.txt .
+# Copy local code to the container image.
+ENV APP_HOME /app
+WORKDIR $APP_HOME
+COPY . ./
 
-RUN pip install --no-cache-dir -r requirements.txt
+# Install production dependencies.
+RUN pip install -r requirements.txt
 
-COPY ml_handler.py .
-COPY recyclemodel.h5 .
-
-EXPOSE 8080
-
-CMD ["python", "ml_handler.py"]
+# Run the web service on container startup. Here we use the gunicorn
+# webserver, with one worker process and 8 threads.
+# For environments with multiple CPU cores, increase the number of workers
+# to be equal to the cores available.
+# Timeout is set to 0 to disable the timeouts of the workers to allow Cloud Run to handle instance scaling.
+CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 --timeout 0 main:app
