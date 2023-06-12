@@ -3,20 +3,15 @@ package com.example.recyclops.ui.history
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.recyclops.data.SetoranTerakhir
+import com.example.recyclops.data.UserHistoryItem
 import com.example.recyclops.databinding.ItemHistoryBinding
 
-class HistoryAdapter(private val listSetoran: ArrayList<SetoranTerakhir>) : RecyclerView.Adapter<HistoryAdapter.UserViewHolder>() {
+class HistoryAdapter(private val listSetoran: ArrayList<UserHistoryItem>) : RecyclerView.Adapter<HistoryAdapter.UserViewHolder>() {
     inner class UserViewHolder(private val binding: ItemHistoryBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(setoran: SetoranTerakhir) {
+        fun bind(setoran: UserHistoryItem) {
             binding.apply {
-                val berat = setoran.quantity
-                val quantity = "$berat KG"
-                ivHistory.setImageResource(setoran.imageSampah)
-                tvHistoryNama.text = setoran.name
-                tvHistroyQuantity.text = quantity
-                tvHistoryBank.text = setoran.bankSampah
+
             }
         }
     }

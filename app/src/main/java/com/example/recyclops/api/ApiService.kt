@@ -17,9 +17,19 @@ interface ApiService {
     @POST("postpoint")
     fun uploadImageConfirmed(
         @Header("authorization") token: String,
-        @Field ("uniqueId") uniqueId: String,
         @Field ("wasteType") wasteType: String,
-        @Field ("weight") weight: Int
+        @Field ("weight") weight: Int,
+        @Field ("imageUrl") imageUrl: String,
+        @Field ("confidence") confidence: Float
     ): Call<UploadImageConfirmedResponse>
 
+    @GET("getpoint")
+    fun getUserPoint(
+        @Header("authorization") token: String
+    ): Call<GetUserPointResponse>
+
+    @GET("history")
+    fun getUserHistory(
+        @Header("authorization") token: String
+    ): Call <GetUserHistoryResponse>
 }

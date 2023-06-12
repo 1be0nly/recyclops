@@ -68,16 +68,17 @@ class ImageConfirmationActivity : AppCompatActivity() {
                     //viewModel.uploadImage("Bearer $token",imageMultipart)
                     //Log.d("Token", token)
                 //}
-                Handler(Looper.getMainLooper()).postDelayed({
-                    viewModel.getResult().observe(this){
-                        intent.putExtra("imageUrl", it.imageUrl)
-                        intent.putExtra("uniqueId", it.uniqueId)
-                        intent.putExtra("wasteType", it.wasteType)
-                        intent.putExtra("confidence", it.confidence.toString())
+                    viewModel.scannedImage.observe(this){
+                        if (it != null){
+                            intent.putExtra("imageUrl", it.imageUrl)
+                            intent.putExtra("uniqueId", it.uniqueId)
+                            intent.putExtra("wasteType", it.wasteType)
+                            intent.putExtra("confidence", it.confidence.toString())
+                            startActivity(intent)
+                        }else{
+                            Toast.makeText(this, "Gagal", Toast.LENGTH_SHORT).show()
+                        }
                     }
-                    startActivity(intent)
-                }, 3000)
-
                 //viewModel.getResult().observe(this){
                         //while (it.imageUrl != null){
                             //intent.putExtra("imageUrl", it.imageUrl)

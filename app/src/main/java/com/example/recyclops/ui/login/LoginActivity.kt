@@ -46,8 +46,8 @@ class LoginActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         binding.btnLogin.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            Toast.makeText(this, "Fitur Ini Masih Dalam Perkembangan,\n" +
+                    "Silahkan Login Menggunakan Google", Toast.LENGTH_LONG).show()
         }
 
         binding.btnLoginGoogle.setOnClickListener {

@@ -8,10 +8,8 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.recyclops.R
-import com.example.recyclops.data.SetoranTerakhir
+import com.example.recyclops.data.UserHistoryItem
 import com.example.recyclops.databinding.ActivityHistoryBinding
-import com.example.recyclops.databinding.ActivityLoginBinding
-import com.example.recyclops.ui.home.SetoranAdapter
 import com.example.recyclops.ui.login.LoginActivity
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -19,7 +17,7 @@ import com.google.firebase.ktx.Firebase
 class HistoryActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityHistoryBinding
-    private val list = ArrayList<SetoranTerakhir>()
+    private val list = ArrayList<UserHistoryItem>()
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.logout, menu)
@@ -46,15 +44,15 @@ class HistoryActivity : AppCompatActivity() {
     }
 
     @SuppressLint("Recycle")
-    private fun getListSetoran():ArrayList<SetoranTerakhir>{
+    private fun getListSetoran():ArrayList<UserHistoryItem>{
         val dataName = resources.getStringArray(R.array.data_name)
         val dataQuantity = resources.getStringArray(R.array.data_quantity)
-        val dataBank = resources.getStringArray(R.array.data_bank)
+        val dataBank = resources.getIntArray(R.array.data_bank)
         val dataImage = resources.obtainTypedArray(R.array.data_image)
 
-        val listSetoran =ArrayList<SetoranTerakhir>()
+        val listSetoran =ArrayList<UserHistoryItem>()
         for (i in dataName.indices){
-            val setoran = SetoranTerakhir(dataName[i], dataQuantity[i], dataBank[i], dataImage.getResourceId(i, -1))
+            val setoran = UserHistoryItem(dataName[i], dataQuantity[i], dataBank[i], dataImage.getResourceId(i, -1))
             listSetoran.add(setoran)
         }
         return listSetoran

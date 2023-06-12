@@ -3,17 +3,32 @@ package com.example.recyclops.ui.home
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.recyclops.data.SetoranTerakhir
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.example.recyclops.data.UserHistoryItem
 import com.example.recyclops.databinding.ItemSetoranHomeBinding
 
-class SetoranAdapter (private val listSetoran: ArrayList<SetoranTerakhir>) : RecyclerView.Adapter<SetoranAdapter.UserViewHolder>() {
+class SetoranAdapter () : RecyclerView.Adapter<SetoranAdapter.UserViewHolder>() {
+
+    private val list = ArrayList<UserHistoryItem>()
+
+    fun setList (userHistoryItem: ArrayList<UserHistoryItem>){
+        list.clear()
+        list.addAll(userHistoryItem)
+        notifyItemChanged(userHistoryItem.size)
+    }
+
     inner class UserViewHolder(private val binding : ItemSetoranHomeBinding) : RecyclerView.ViewHolder(binding.root){
-        fun bind (setoran :SetoranTerakhir) {
+        fun bind (setoran :UserHistoryItem) {
             binding.apply {
-                val berat = setoran.quantity
+                val berat = setoran.weight
                 val quantity = "$berat KG"
-                imgItemSetoran.setImageResource(setoran.imageSampah)
-                tvItemNama.text = setoran.name
+                Glide.with(itemView)
+                    .load(setoran.imageUrl)
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .centerCrop()
+                    .into(imgItemSetoran)
+                tvItemNama.text = setoran.wasteType
                 tvItemQuantity.text = quantity
             }
         }
@@ -25,8 +40,8 @@ class SetoranAdapter (private val listSetoran: ArrayList<SetoranTerakhir>) : Rec
     }
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
-        holder.bind(listSetoran[position])
+        holder.bind(list[position])
     }
 
-    override fun getItemCount(): Int = listSetoran.size
+    override fun getItemCount(): Int = list.size
 }

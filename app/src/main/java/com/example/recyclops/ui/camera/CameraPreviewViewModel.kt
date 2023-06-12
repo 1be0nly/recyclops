@@ -23,22 +23,15 @@ import retrofit2.Response
 @SuppressLint("NullSafeMutableLiveData")
 class CameraPreviewViewModel (private val pref: TokenPreferences) : ViewModel() {
 
-    val scannedImage = MutableLiveData<FileUploadResponse>()
+    val _scannedImage = MutableLiveData<FileUploadResponse?>()
+    val scannedImage
+        get() = _scannedImage
     val scannedImage2 = MutableLiveData<UploadImageConfirmedResponse?>()
 
-    private var _scannedTrash = MutableLiveData<List<TrashScanned>>()
-    val scannedTrash: LiveData<List<TrashScanned>>
-        get() = _scannedTrash
 
-
-
-    fun addListTrashScanned(listTrashScanned: List<TrashScanned>) {
-        _scannedTrash.value = listTrashScanned
-    }
-
-    fun uploadImageConfirmation(token: String, wasteType: String, weight: Int,uniqueId: String, context: Context){
+    fun uploadImageConfirmation(token: String, wasteType: String, weight: Int, imageUrl: String, confidence: Float){
         val apiService = ApiConfig().getApiService()
-        val uploadImageRequest = apiService.uploadImageConfirmed(token,wasteType,uniqueId,weight)
+        val uploadImageRequest = apiService.uploadImageConfirmed(token,wasteType,weight,imageUrl,confidence)
         uploadImageRequest.enqueue(object : Callback<UploadImageConfirmedResponse>{
             override fun onResponse(
                 call: Call<UploadImageConfirmedResponse>,
@@ -51,40 +44,9 @@ class CameraPreviewViewModel (private val pref: TokenPreferences) : ViewModel() 
                 }
             }
             override fun onFailure(call: Call<UploadImageConfirmedResponse>, t: Throwable) {
-                Toast.makeText(context, t.message, Toast.LENGTH_SHORT).show()
+                Log.d("Failure", t.message.toString())
             }
         })
-    }
-
-    fun increaseQuantity(id: Int) {
-        val list = _scannedTrash.value?.toMutableList()
-        val index = list?.indexOfFirst { it.id == id }
-        if (index != null && index >= 0) {
-            list[index].quantity += 1
-            _scannedTrash.value = list
-        }
-    }
-
-    fun decreaseQuantity(id: Int) {
-        val list = _scannedTrash.value?.toMutableList()
-        val index = list?.indexOfFirst { it.id == id }
-        if (index != null && index >= 0) {
-            if (list[index].quantity == 1)  {
-                _scannedTrash.value = list
-            } else {
-                list[index].quantity -= 1
-                _scannedTrash.value = list
-            }
-        }
-    }
-
-    fun deleteItem(id: Int) {
-        val list = _scannedTrash.value?.toMutableList()
-        val index = list?.indexOfFirst { it.id == id }
-        if (index != null ) {
-            list.removeAt(index)
-            _scannedTrash.value = list
-        }
     }
 
     fun uploadImage(
@@ -104,11 +66,11 @@ class CameraPreviewViewModel (private val pref: TokenPreferences) : ViewModel() 
                 if (response.isSuccessful) {
                     if (responseBody != null) {
                         Log.d("Success", responseBody.error.toString())
-                        Log.d("ImageUrl", responseBody.imageUrl.toString())
+                        Log.d("uniqueId", responseBody.imageUrl.toString())
                         Log.d("WasteType", responseBody.wasteType.toString())
                         Log.d("Confidence", responseBody.confidence.toString())
                         //ResponseInterface.fileUploadResponseAdded(responseBody)
-                        scannedImage.postValue(responseBody)
+                        scannedImage.value = responseBody
                     }
                 } else {
                     Log.d("Failure", responseBody?.error.toString())
@@ -119,10 +81,6 @@ class CameraPreviewViewModel (private val pref: TokenPreferences) : ViewModel() 
                 Log.d("Failure", t.message.toString())
             }
         })
-    }
-
-    fun getResult(): LiveData<FileUploadResponse>{
-        return scannedImage
     }
 
     fun getToken(): LiveData<String> {

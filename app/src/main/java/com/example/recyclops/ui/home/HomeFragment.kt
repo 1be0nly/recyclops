@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,39 +18,32 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.recyclops.R
-import com.example.recyclops.data.SetoranTerakhir
+import com.example.recyclops.data.UserHistoryItem
 import com.example.recyclops.databinding.FragmentHomeBinding
 import com.example.recyclops.ui.camera.CameraActivity
 import com.example.recyclops.ui.history.HistoryActivity
 import com.example.recyclops.ui.maps.MapsActivity
+import com.google.firebase.auth.FirebaseAuth
 
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
+    private lateinit var adapter: SetoranAdapter
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-    private val list = ArrayList<SetoranTerakhir>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
-
-        list.addAll(getListSetoran())
-        showRecyclerList()
+        adapter = SetoranAdapter()
 
         binding.tvHomeSetoran.setOnClickListener{
             startActivity(Intent(requireContext(), HistoryActivity::class.java))
@@ -75,6 +69,19 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
         return root
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val homeViewModel =
+            ViewModelProvider(this).get(HomeViewModel::class.java)
+        getPoints(homeViewModel)
+        adapter = SetoranAdapter()
+
+
+        setUserHistory(homeViewModel)
+        getList(homeViewModel)
+        showRecyclerList()
     }
 
     override fun onDestroyView() {
@@ -103,26 +110,56 @@ class HomeFragment : Fragment() {
             }
         }
     }
-
-    @SuppressLint("Recycle")
-    private fun getListSetoran():ArrayList<SetoranTerakhir>{
-        val dataName = resources.getStringArray(R.array.data_name)
-        val dataQuantity = resources.getStringArray(R.array.data_quantity)
-        val dataBank = resources.getStringArray(R.array.data_bank)
-        val dataImage = resources.obtainTypedArray(R.array.data_image)
-
-        val listSetoran =ArrayList<SetoranTerakhir>()
-        for (i in dataName.indices){
-            val setoran = SetoranTerakhir(dataName[i], dataQuantity[i], dataBank[i], dataImage.getResourceId(i, -1))
-            listSetoran.add(setoran)
-        }
-        return listSetoran
+    private fun showRecyclerList() {
+        binding.rvHome.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+        binding.rvHome.adapter = adapter
     }
 
-    private fun showRecyclerList() {
-        binding.rvHome.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        val listSetoranAdapter = SetoranAdapter(list)
-        binding.rvHome.adapter = listSetoranAdapter
+    private fun getList(homeViewModel: HomeViewModel){
+        homeViewModel.getUserHistory().observe(requireActivity()){
+            if (it != null){
+                Log.d("UserHistory", it.toString())
+                adapter = SetoranAdapter()
+                adapter.setList(it)
+            }
+        }
+    }
+
+    private fun setUserHistory(homeViewModel: HomeViewModel){
+        val mUser = FirebaseAuth.getInstance().currentUser
+        mUser!!.getIdToken(true)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val idToken: String = task.result.token.toString()
+                    val token  = "Bearer $idToken"
+                    homeViewModel.setUserHistory(token)
+                } else {
+                    Log.d("Exception", task.exception.toString())
+                }
+            }
+    }
+
+    private fun getPoints(homeViewModel: HomeViewModel){
+        val textView: TextView = binding.textHome
+        val mUser = FirebaseAuth.getInstance().currentUser
+        mUser!!.getIdToken(true)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val idToken: String = task.result.token.toString()
+                    val token  = "Bearer $idToken"
+                    homeViewModel.getUserPoint(token)
+                    homeViewModel.point.observe(requireActivity()){
+                        if (it != null){
+                            textView.text = it.totalPoints.toString()
+                        }else{
+                            Toast.makeText(requireContext(), "Gagal Mendapatkan Poin", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+
+                } else {
+                    Log.d("Exception", task.exception.toString())
+                }
+            }
     }
 
 

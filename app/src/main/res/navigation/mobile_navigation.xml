@@ -14,7 +14,7 @@
     <fragment
         android:id="@+id/navigation_scan"
         android:name="com.example.recyclops.ui.scan.ScanFragment"
-        android:label="@string/transaksi"
+        android:label="@string/scan_barcode"
         tools:layout="@layout/fragment_scan" />
 
     <fragment

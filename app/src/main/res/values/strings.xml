@@ -102,5 +102,8 @@
     <string name="kirim">Kirim</string>
     <string name="jenis_sampah">Jenis Sampah</string>
     <string name="jenis_sampah_2">Jenis Sampah :</string>
+    <string name="scan_lagi">Scan Lagi ?</string>
+    <string name="tidak">Tidak</string>
+    <string name="ya">Ya</string>
 
 </resources>

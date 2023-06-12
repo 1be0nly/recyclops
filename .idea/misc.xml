@@ -27,7 +27,7 @@
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/Recyclops/app/src/main/res/drawable/ic_transaksi.xml" value="0.1" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/Recyclops/app/src/main/res/layout-v28/fragment_home.xml" value="0.16621376811594202" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/Recyclops/app/src/main/res/layout/activity_camera.xml" value="0.25" />
-        <entry key="..\:/Users/Administrator/AndroidStudioProjects/Recyclops/app/src/main/res/layout/activity_camera_preview.xml" value="0.10135135135135136" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/Recyclops/app/src/main/res/layout/activity_camera_preview.xml" value="0.22" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/Recyclops/app/src/main/res/layout/activity_history.xml" value="0.14479166666666668" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/Recyclops/app/src/main/res/layout/activity_image_confirmation.xml" value="0.2" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/Recyclops/app/src/main/res/layout/activity_login.xml" value="0.25" />
@@ -36,7 +36,7 @@
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/Recyclops/app/src/main/res/layout/activity_register.xml" value="0.18" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/Recyclops/app/src/main/res/layout/activity_splash.xml" value="0.25" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/Recyclops/app/src/main/res/layout/fragment_dashboard.xml" value="0.16485507246376813" />
-        <entry key="..\:/Users/Administrator/AndroidStudioProjects/Recyclops/app/src/main/res/layout/fragment_home.xml" value="0.18" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/Recyclops/app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/Recyclops/app/src/main/res/layout/fragment_notifications.xml" value="0.16485507246376813" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/Recyclops/app/src/main/res/layout/fragment_poin.xml" value="0.25" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/Recyclops/app/src/main/res/layout/fragment_profile.xml" value="0.25" />
@@ -45,6 +45,7 @@
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/Recyclops/app/src/main/res/layout/item_setoran.xml" value="0.18" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/Recyclops/app/src/main/res/layout/item_setoran_home.xml" value="0.33" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/Recyclops/app/src/main/res/layout/item_trash_scanned.xml" value="0.17300724637681159" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/Recyclops/app/src/main/res/layout/layout_yesno_dialog.xml" value="0.25" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/Recyclops/app/src/main/res/menu/bottom_nav_menu.xml" value="0.1" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/Recyclops/app/src/main/res/menu/logout.xml" value="0.14479166666666668" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/Recyclops/app/src/main/res/menu/map_options.xml" value="0.1" />
