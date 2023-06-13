@@ -29,6 +29,7 @@ class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private lateinit var adapter: SetoranAdapter
+    private lateinit var homeViewModel: HomeViewModel
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -43,7 +44,10 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        homeViewModel = ViewModelProvider(this)[HomeViewModel::class.java]
+
         adapter = SetoranAdapter()
+        showRecyclerList()
 
         binding.tvHomeSetoran.setOnClickListener{
             startActivity(Intent(requireContext(), HistoryActivity::class.java))
@@ -73,15 +77,34 @@ class HomeFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        val homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
+        getAllRVData()
+
+//        getPoints(homeViewModel)
+//        adapter = SetoranAdapter()
+//
+//
+//        setUserHistory(homeViewModel)
+//        getList(homeViewModel)
+//        showRecyclerList()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getAllRVData()
+
+//        getPoints(homeViewModel)
+//        adapter = SetoranAdapter()
+
+
+//        setUserHistory(homeViewModel)
+//        getList(homeViewModel)
+//        showRecyclerList()
+    }
+
+    private fun getAllRVData() {
         getPoints(homeViewModel)
-        adapter = SetoranAdapter()
-
-
         setUserHistory(homeViewModel)
         getList(homeViewModel)
-        showRecyclerList()
     }
 
     override fun onDestroyView() {
@@ -119,8 +142,9 @@ class HomeFragment : Fragment() {
         homeViewModel.getUserHistory().observe(requireActivity()){
             if (it != null){
                 Log.d("UserHistory", it.toString())
-                adapter = SetoranAdapter()
+//                adapter = SetoranAdapter()
                 adapter.setList(it)
+                adapter.notifyDataSetChanged()
             }
         }
     }

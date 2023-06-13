@@ -4,23 +4,29 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.recyclops.R
 import com.example.recyclops.data.UserHistoryItem
 import com.example.recyclops.databinding.ActivityHistoryBinding
+import com.example.recyclops.ui.home.HomeViewModel
 import com.example.recyclops.ui.login.LoginActivity
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
 class HistoryActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityHistoryBinding
+    lateinit var viewModel: HistoryViewModel
     private val list = ArrayList<UserHistoryItem>()
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.logout, menu)
+
         return true
     }
 
@@ -38,9 +44,35 @@ class HistoryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        list.addAll(getListSetoran())
+        viewModel = ViewModelProvider(this)[HistoryViewModel::class.java]
+
+        setUserHistory(viewModel)
+
+        viewModel.historyTrash.observe(this) { history ->
+            if (history != null) {
+                Log.d("Logas", history.toString())
+                list.addAll(history)
+                showRecyclerList()
+            }
+        }
+
+//        list.addAll(getListSetoran())
         showRecyclerList()
 
+    }
+
+    private fun setUserHistory(HistoryViewModel: HistoryViewModel){
+        val mUser = FirebaseAuth.getInstance().currentUser
+        mUser!!.getIdToken(true)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val idToken: String = task.result.token.toString()
+                    val token  = "Bearer $idToken"
+                    HistoryViewModel.setUserHistory(token)
+                } else {
+                    Log.d("Exception", task.exception.toString())
+                }
+            }
     }
 
     @SuppressLint("Recycle")
@@ -50,11 +82,12 @@ class HistoryActivity : AppCompatActivity() {
         val dataBank = resources.getIntArray(R.array.data_bank)
         val dataImage = resources.obtainTypedArray(R.array.data_image)
 
-        val listSetoran =ArrayList<UserHistoryItem>()
+        val listSetoran = ArrayList<UserHistoryItem>()
         for (i in dataName.indices){
             val setoran = UserHistoryItem(dataName[i], dataQuantity[i], dataBank[i], dataImage.getResourceId(i, -1))
             listSetoran.add(setoran)
         }
+
         return listSetoran
     }
 
