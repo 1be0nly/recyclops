@@ -6,79 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".ui.scan.ScanFragment">
 
-    <ImageView
-        android:id="@+id/iv_preview_trash"
-        android:layout_width="256dp"
-        android:layout_height="448dp"
-        android:layout_marginTop="24dp"
-        android:contentDescription="@string/gambar_sampah"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@tools:sample/avatars" />
-
-    <LinearLayout
-        android:id="@+id/edt_preview"
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_preview_trash">
-
-        <TextView
-            android:id="@+id/tv_preview_jenis"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView3"
-            android:text="@string/jenis_sampah_2"
-            android:textSize="18sp"
-            android:layout_marginEnd="4dp"/>
-
-        <TextView
-            android:id="@+id/tv_preview_type"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView3"
-            tools:text="@string/jenis_sampah"
-            android:textSize="18sp"/>
-
-    </LinearLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_preview_weight"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="32dp"
-        android:hint="@string/masukkan_berat"
+        android:text="@string/masih_dalam_tahap_perkembangan"
+        android:textAlignment="center"
+        android:textSize="32sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_preview">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tf_transaksi_weight"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:lines="1" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_preview_send"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/kirim"
-        app:cornerRadius="8dp"
-        app:layout_constraintEnd_toEndOf="@+id/til_preview_weight"
-        app:layout_constraintStart_toStartOf="@+id/til_preview_weight"
-        app:layout_constraintTop_toBottomOf="@+id/til_preview_weight" />
-
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

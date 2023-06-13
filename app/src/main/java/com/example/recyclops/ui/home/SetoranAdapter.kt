@@ -23,6 +23,8 @@ class SetoranAdapter () : RecyclerView.Adapter<SetoranAdapter.UserViewHolder>() 
             binding.apply {
                 val berat = setoran.weight
                 val quantity = "$berat KG"
+                val point = setoran.points
+                val _point = "$point Point"
                 Glide.with(itemView)
                     .load(setoran.imageUrl)
                     .transition(DrawableTransitionOptions.withCrossFade())
@@ -30,6 +32,7 @@ class SetoranAdapter () : RecyclerView.Adapter<SetoranAdapter.UserViewHolder>() 
                     .into(imgItemSetoran)
                 tvItemNama.text = setoran.wasteType
                 tvItemQuantity.text = quantity
+                tvItemPoin.text = _point
             }
         }
     }

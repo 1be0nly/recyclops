@@ -63,12 +63,16 @@ class CameraPreviewActivity : AppCompatActivity() {
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
                             val idToken: String? = task.result.token
+                            val status = "Berhasil"
                             val message = "Scan Lagi ?"
                             viewModel.uploadImageConfirmation("Bearer $idToken",wasteType,weight, imageUrl, confidence)
-                            showYesNoDialog(message)
+                            showYesNoDialog(status,message)
                             Log.d("upload", "$idToken,$wasteType,$weight")
                             Log.d("token", idToken.toString())
                         } else {
+                            val status = "Gagal"
+                            val message = "Scan Lagi ?"
+                            showYesNoDialog(status,message)
                             Log.d("Exception", task.exception.toString())
                         }
                     }
@@ -88,7 +92,7 @@ class CameraPreviewActivity : AppCompatActivity() {
         }
     }
 
-    private fun showYesNoDialog(message: String) {
+    private fun showYesNoDialog(status:String, message: String) {
         val dialog = Dialog(this)
         bindingDialog = LayoutYesnoDialogBinding.inflate(layoutInflater)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -98,6 +102,7 @@ class CameraPreviewActivity : AppCompatActivity() {
 
         bindingDialog.apply {
             tvDialog.text = message
+            tvStatus.text = status
 
             btnYes.setOnClickListener{
                 startActivity(Intent(this@CameraPreviewActivity, CameraActivity::class.java))

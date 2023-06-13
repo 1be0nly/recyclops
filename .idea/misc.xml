@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
@@ -35,10 +36,11 @@
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/Recyclops/app/src/main/res/layout/activity_register.xml" value="0.18" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/Recyclops/app/src/main/res/layout/activity_splash.xml" value="0.25" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/Recyclops/app/src/main/res/layout/fragment_dashboard.xml" value="0.16485507246376813" />
-        <entry key="..\:/Users/Administrator/AndroidStudioProjects/Recyclops/app/src/main/res/layout/fragment_home.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/Recyclops/app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/Recyclops/app/src/main/res/layout/fragment_notifications.xml" value="0.16485507246376813" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/Recyclops/app/src/main/res/layout/fragment_poin.xml" value="0.25" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/Recyclops/app/src/main/res/layout/fragment_profile.xml" value="0.25" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/Recyclops/app/src/main/res/layout/fragment_scan.xml" value="0.15" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/Recyclops/app/src/main/res/layout/fragment_transaksi.xml" value="0.1" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/Recyclops/app/src/main/res/layout/item_history.xml" value="0.33" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/Recyclops/app/src/main/res/layout/item_setoran.xml" value="0.18" />

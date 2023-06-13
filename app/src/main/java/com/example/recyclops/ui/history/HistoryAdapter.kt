@@ -3,6 +3,8 @@ package com.example.recyclops.ui.history
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.recyclops.data.UserHistoryItem
 import com.example.recyclops.databinding.ItemHistoryBinding
 
@@ -11,7 +13,18 @@ class HistoryAdapter(private val listSetoran: ArrayList<UserHistoryItem>) : Recy
         RecyclerView.ViewHolder(binding.root) {
         fun bind(setoran: UserHistoryItem) {
             binding.apply {
-
+                val berat = setoran.weight
+                val quantity = "$berat KG"
+                val point = setoran.points
+                val _point = "$point Point"
+                Glide.with(itemView)
+                    .load(setoran.imageUrl)
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .centerCrop()
+                    .into(ivHistory)
+                tvHistoryNama.text = setoran.wasteType
+                tvHistroyQuantity.text = quantity
+                tvHistoryPoint.text = _point
             }
         }
     }
