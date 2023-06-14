@@ -78,9 +78,7 @@ class HomeFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        showLoading(true)
         getAllRVData()
-        showLoading(false)
 
 //        getPoints(homeViewModel)
 //        adapter = SetoranAdapter()
@@ -93,9 +91,7 @@ class HomeFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        showLoading(true)
         getAllRVData()
-        showLoading(false)
 
 //        getPoints(homeViewModel)
 //        adapter = SetoranAdapter()
@@ -158,6 +154,7 @@ class HomeFragment : Fragment() {
 //                adapter = SetoranAdapter()
                 adapter.setList(it)
                 adapter.notifyDataSetChanged()
+                showLoading(false)
             }
         }
     }
@@ -171,12 +168,14 @@ class HomeFragment : Fragment() {
                     val token  = "Bearer $idToken"
                     homeViewModel.setUserHistory(token)
                 } else {
+                    showLoading(false)
                     Log.d("Exception", task.exception.toString())
                 }
             }
     }
 
     private fun getPoints(homeViewModel: HomeViewModel){
+        showLoading(true)
         val textView: TextView = binding.textHome
         val mUser = FirebaseAuth.getInstance().currentUser
         mUser!!.getIdToken(true)
@@ -189,6 +188,7 @@ class HomeFragment : Fragment() {
                         if (it != null){
                             textView.text = it.totalPoints.toString()
                         }else{
+                            showLoading(false)
                             Toast.makeText(requireContext(), "Gagal Mendapatkan Poin", Toast.LENGTH_SHORT).show()
                         }
                     }

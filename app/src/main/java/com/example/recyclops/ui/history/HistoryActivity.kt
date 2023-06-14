@@ -47,12 +47,12 @@ class HistoryActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this)[HistoryViewModel::class.java]
 
-        showLoading(true)
 
         setUserHistory(viewModel)
 
         viewModel.historyTrash.observe(this) { history ->
             if (history != null) {
+                showLoading(true)
                 Log.d("Logas", history.toString())
                 list.addAll(history)
                 showRecyclerList()

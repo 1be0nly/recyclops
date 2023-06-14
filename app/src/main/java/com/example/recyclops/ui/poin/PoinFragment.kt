@@ -32,11 +32,7 @@ class PoinFragment : Fragment() {
         _binding = FragmentPoinBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        showLoading(true)
-
         getPoints(poinViewModel)
-
-        showLoading(false)
 
         return root
     }
@@ -55,6 +51,7 @@ class PoinFragment : Fragment() {
     }
 
     private fun getPoints(homeViewModel: PoinViewModel){
+        showLoading(true)
         val textView: TextView = binding.tvPoin
         val mUser = FirebaseAuth.getInstance().currentUser
         mUser!!.getIdToken(true)
@@ -65,8 +62,10 @@ class PoinFragment : Fragment() {
                     homeViewModel.getUserPoint(token)
                     homeViewModel.point.observe(requireActivity()){
                         if (it != null){
+                            showLoading(false)
                             textView.text = it.totalPoints.toString()
                         }else{
+                            showLoading(false)
                             Toast.makeText(requireContext(), "Gagal Mendapatkan Poin", Toast.LENGTH_SHORT).show()
                         }
                     }

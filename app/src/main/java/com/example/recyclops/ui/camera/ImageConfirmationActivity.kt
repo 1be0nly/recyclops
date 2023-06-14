@@ -46,8 +46,8 @@ class ImageConfirmationActivity : AppCompatActivity() {
 
         binding.btnCancel.setOnClickListener{ cancel() }
         binding.btnConfirm.setOnClickListener{
+            showLoading(true)
             if (myFile != null){
-                showLoading(true)
                 val file = reduceFileImage(myFile as File)
                 val intent = Intent(this, CameraPreviewActivity::class.java)
                 val requestImageFile = file.asRequestBody("image/jpeg".toMediaType())
@@ -62,6 +62,7 @@ class ImageConfirmationActivity : AppCompatActivity() {
                         if (task.isSuccessful) {
                             val idToken: String? = task.result.token
                             viewModel.uploadImage("Bearer $idToken",imageMultipart,this)
+                            showLoading(false)
                             Log.d("token", idToken.toString())
                         } else {
                             showLoading(false)
