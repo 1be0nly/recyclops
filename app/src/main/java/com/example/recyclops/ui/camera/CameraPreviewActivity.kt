@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.view.Window
 import android.widget.Button
 import android.widget.TextView
@@ -43,7 +44,6 @@ class CameraPreviewActivity : AppCompatActivity() {
         val imageUrl = intent.getStringExtra("imageUrl").toString()
         val wasteType = intent.getStringExtra("wasteType")
         val confidence = intent.getStringExtra("confidence").toString().toFloat()
-        val uniqueId = intent.getStringExtra("uniqueId")
 
         onBackPressedDispatcher.addCallback(this, object: OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
@@ -56,12 +56,14 @@ class CameraPreviewActivity : AppCompatActivity() {
 
         binding.btnPreviewSend.setOnClickListener{
             if (binding.tfPreviewWeight.text!!.isNotEmpty()){
+                showLoading(true)
                 val wasteType = binding.tvPreviewType.text.toString()
                 val weight = binding.tfPreviewWeight.text.toString().toInt()
                 val mUser = FirebaseAuth.getInstance().currentUser
                 mUser!!.getIdToken(true)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
+                            showLoading(false)
                             val idToken: String? = task.result.token
                             val status = "Berhasil"
                             val message = "Scan Lagi ?"
@@ -70,7 +72,8 @@ class CameraPreviewActivity : AppCompatActivity() {
                             Log.d("upload", "$idToken,$wasteType,$weight")
                             Log.d("token", idToken.toString())
                         } else {
-                            val status = "Gagal"
+                            showLoading(false)
+                            val status = "Gagal ${task.exception}"
                             val message = "Scan Lagi ?"
                             showYesNoDialog(status,message)
                             Log.d("Exception", task.exception.toString())
@@ -89,6 +92,14 @@ class CameraPreviewActivity : AppCompatActivity() {
                 .centerCrop()
                 .into(ivPreviewTrash)
             tvPreviewType.text = wasteType
+        }
+    }
+
+    private fun showLoading(state: Boolean) {
+        if (state) {
+            binding.progressBar.visibility = View.VISIBLE
+        } else {
+            binding.progressBar.visibility = View.GONE
         }
     }
 

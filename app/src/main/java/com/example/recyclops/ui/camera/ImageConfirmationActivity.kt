@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -39,11 +40,14 @@ class ImageConfirmationActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this, ImageConfirmViewModelFactory(pref))[CameraPreviewViewModel::class.java]
 
+        showLoading(true)
         getPicture()
+        showLoading(false)
 
         binding.btnCancel.setOnClickListener{ cancel() }
         binding.btnConfirm.setOnClickListener{
             if (myFile != null){
+                showLoading(true)
                 val file = reduceFileImage(myFile as File)
                 val intent = Intent(this, CameraPreviewActivity::class.java)
                 val requestImageFile = file.asRequestBody("image/jpeg".toMediaType())
@@ -60,7 +64,8 @@ class ImageConfirmationActivity : AppCompatActivity() {
                             viewModel.uploadImage("Bearer $idToken",imageMultipart,this)
                             Log.d("token", idToken.toString())
                         } else {
-                            Log.d("Exception", task.exception.toString())
+                            showLoading(false)
+                            Toast.makeText(this, task.exception.toString(), Toast.LENGTH_SHORT).show()
                         }
                     }
 
@@ -74,8 +79,10 @@ class ImageConfirmationActivity : AppCompatActivity() {
                             intent.putExtra("uniqueId", it.uniqueId)
                             intent.putExtra("wasteType", it.wasteType)
                             intent.putExtra("confidence", it.confidence.toString())
+                            showLoading(false)
                             startActivity(intent)
                         }else{
+                            showLoading(false)
                             Toast.makeText(this, "Gagal", Toast.LENGTH_SHORT).show()
                         }
                     }
@@ -89,8 +96,17 @@ class ImageConfirmationActivity : AppCompatActivity() {
                     //}
                 //}
             }else{
+                showLoading(false)
                 Toast.makeText(this, "Silahkan Foto Sampah Terlebih Dahulu", Toast.LENGTH_SHORT).show()
             }
+        }
+    }
+
+    private fun showLoading(state: Boolean) {
+        if (state) {
+            binding.progressBar.visibility = View.VISIBLE
+        } else {
+            binding.progressBar.visibility = View.GONE
         }
     }
 

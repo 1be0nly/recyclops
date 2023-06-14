@@ -5,6 +5,7 @@ import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.Toast
@@ -35,20 +36,28 @@ class CameraActivity : AppCompatActivity() {
 
         hideSystemUI()
 
+        showLoading(true)
         startCamera()
+        showLoading(false)
 
         binding.ivShutter.setOnClickListener {
+            showLoading(true)
             takePhoto()
+            showLoading(false)
         }
         binding.ivRotate.setOnClickListener {
+            showLoading(true)
             cameraSelector =
                 if (cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA) CameraSelector.DEFAULT_FRONT_CAMERA
                 else CameraSelector.DEFAULT_BACK_CAMERA
+            showLoading(false)
             startCamera()
         }
 
         binding.ivGallery.setOnClickListener{
+            showLoading(true)
             startGallery()
+            showLoading(false)
         }
 
     }
@@ -57,6 +66,14 @@ class CameraActivity : AppCompatActivity() {
         super.onResume()
         hideSystemUI()
         startCamera()
+    }
+
+    private fun showLoading(state: Boolean) {
+        if (state) {
+            binding.progressBar.visibility = View.VISIBLE
+        } else {
+            binding.progressBar.visibility = View.GONE
+        }
     }
 
     private fun startCamera() {

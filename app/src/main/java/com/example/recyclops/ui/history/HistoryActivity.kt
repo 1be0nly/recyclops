@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.recyclops.R
@@ -46,6 +47,8 @@ class HistoryActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this)[HistoryViewModel::class.java]
 
+        showLoading(true)
+
         setUserHistory(viewModel)
 
         viewModel.historyTrash.observe(this) { history ->
@@ -58,7 +61,16 @@ class HistoryActivity : AppCompatActivity() {
 
 //        list.addAll(getListSetoran())
         showRecyclerList()
+        showLoading(false)
 
+    }
+
+    private fun showLoading(state: Boolean) {
+        if (state) {
+            binding.progressBar.visibility = View.VISIBLE
+        } else {
+            binding.progressBar.visibility = View.GONE
+        }
     }
 
     private fun setUserHistory(HistoryViewModel: HistoryViewModel){

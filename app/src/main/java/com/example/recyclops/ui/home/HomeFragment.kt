@@ -22,6 +22,7 @@ import com.example.recyclops.data.UserHistoryItem
 import com.example.recyclops.databinding.FragmentHomeBinding
 import com.example.recyclops.ui.camera.CameraActivity
 import com.example.recyclops.ui.history.HistoryActivity
+import com.example.recyclops.ui.login.LoginActivity
 import com.example.recyclops.ui.maps.MapsActivity
 import com.google.firebase.auth.FirebaseAuth
 
@@ -77,7 +78,9 @@ class HomeFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
+        showLoading(true)
         getAllRVData()
+        showLoading(false)
 
 //        getPoints(homeViewModel)
 //        adapter = SetoranAdapter()
@@ -90,7 +93,9 @@ class HomeFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
+        showLoading(true)
         getAllRVData()
+        showLoading(false)
 
 //        getPoints(homeViewModel)
 //        adapter = SetoranAdapter()
@@ -99,6 +104,14 @@ class HomeFragment : Fragment() {
 //        setUserHistory(homeViewModel)
 //        getList(homeViewModel)
 //        showRecyclerList()
+    }
+
+    private fun showLoading(state: Boolean) {
+        if (state) {
+            binding.progressBar.visibility = View.VISIBLE
+        } else {
+            binding.progressBar.visibility = View.GONE
+        }
     }
 
     private fun getAllRVData() {

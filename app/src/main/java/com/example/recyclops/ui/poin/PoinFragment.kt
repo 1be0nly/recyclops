@@ -32,7 +32,11 @@ class PoinFragment : Fragment() {
         _binding = FragmentPoinBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        showLoading(true)
+
         getPoints(poinViewModel)
+
+        showLoading(false)
 
         return root
     }
@@ -40,6 +44,14 @@ class PoinFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun showLoading(state: Boolean) {
+        if (state) {
+            binding.progressBar.visibility = View.VISIBLE
+        } else {
+            binding.progressBar.visibility = View.GONE
+        }
     }
 
     private fun getPoints(homeViewModel: PoinViewModel){

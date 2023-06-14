@@ -31,6 +31,8 @@ class ProfileFragment : Fragment() {
 
         val user = profileViewModel.user
 
+        showLoading(true)
+
         if (user != null){
             user.let {
                 val name = it.displayName
@@ -46,11 +48,20 @@ class ProfileFragment : Fragment() {
         } else{
             Toast.makeText(requireContext(), "Anda Belum Login", Toast.LENGTH_SHORT).show()
         }
+        showLoading(false)
         return root
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun showLoading(state: Boolean) {
+        if (state) {
+            binding.progressBar.visibility = View.VISIBLE
+        } else {
+            binding.progressBar.visibility = View.GONE
+        }
     }
 }
