@@ -56,6 +56,7 @@ class HistoryActivity : AppCompatActivity() {
                 Log.d("Logas", history.toString())
                 list.addAll(history)
                 showRecyclerList()
+                showLoading(false)
             }
         }
 

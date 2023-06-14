@@ -154,7 +154,9 @@ class HomeFragment : Fragment() {
 //                adapter = SetoranAdapter()
                 adapter.setList(it)
                 adapter.notifyDataSetChanged()
-                showLoading(false)
+                if (_binding != null){
+                    showLoading(false)
+                }
             }
         }
     }

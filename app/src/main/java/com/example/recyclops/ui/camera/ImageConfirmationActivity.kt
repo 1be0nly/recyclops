@@ -62,7 +62,6 @@ class ImageConfirmationActivity : AppCompatActivity() {
                         if (task.isSuccessful) {
                             val idToken: String? = task.result.token
                             viewModel.uploadImage("Bearer $idToken",imageMultipart,this)
-                            showLoading(false)
                             Log.d("token", idToken.toString())
                         } else {
                             showLoading(false)
