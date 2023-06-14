@@ -23,7 +23,7 @@ class SetoranAdapter () : RecyclerView.Adapter<SetoranAdapter.UserViewHolder>() 
             binding.apply {
                 val berat = setoran.weight
                 val quantity = "$berat KG"
-                val point = setoran.points
+                val point = setoran.points.toString()
                 val _point = "$point Point"
                 Glide.with(itemView)
                     .load(setoran.imageUrl)

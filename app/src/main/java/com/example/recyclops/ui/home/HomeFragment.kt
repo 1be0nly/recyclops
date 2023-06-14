@@ -149,6 +149,7 @@ class HomeFragment : Fragment() {
 
     private fun getList(homeViewModel: HomeViewModel){
         homeViewModel.getUserHistory().observe(requireActivity()){
+            showLoading(true)
             if (it != null){
                 Log.d("UserHistory", it.toString())
 //                adapter = SetoranAdapter()
@@ -157,6 +158,8 @@ class HomeFragment : Fragment() {
                 if (_binding != null){
                     showLoading(false)
                 }
+            }else{
+                showLoading(false)
             }
         }
     }
@@ -169,6 +172,7 @@ class HomeFragment : Fragment() {
                     val idToken: String = task.result.token.toString()
                     val token  = "Bearer $idToken"
                     homeViewModel.setUserHistory(token)
+                    showLoading(false)
                 } else {
                     showLoading(false)
                     Log.d("Exception", task.exception.toString())
