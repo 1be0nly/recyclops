@@ -1,5 +1,4 @@
 const {Storage} = require('@google-cloud/storage');
-const {v4: uuidv4} = require('uuid');
 const axios = require('axios');
 const admin = require('firebase-admin');
 require('dotenv').config();
@@ -56,10 +55,9 @@ const uploadImage = async (req, res) => {
 // POST classified to database
 const calculatePoint = async (req, res) => {
     try {
-        const uniqueId = uuidv4();
+
         const email = req.user.email;
         const userEmail = filterEmail(email);
-        const uid = req.user.uid;
         const wasteType = req.body.wasteType;
         const weight = req.body.weight;
         const imageUrl = req.body.imageUrl;
