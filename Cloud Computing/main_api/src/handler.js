@@ -51,64 +51,6 @@ const uploadImage = async (req, res) => {
 };
 
 // POST classified to database
-// const calculatePoint = async (req, res) => {
-//     try {
-
-//       const userEmail = req.user.email;
-//       const wasteType = req.body.wasteType;
-//       const weight = req.body.weight
-        
-//       let points = 0;
-  
-//       switch (wasteType) {
-//         case 'Logam':
-//           points = Math.floor(weight * 14);
-//           break;
-//         case 'Kaca':
-//           points = Math.floor(weight * 13);
-//           break;
-//         case 'Kardus':
-//           points = Math.floor(weight * 12);
-//           break;
-//         case 'Kertas':
-//           points = Math.floor(weight * 11);
-//           break;
-//         case 'Plastik':
-//           points = Math.floor(weight * 10);
-//           break;
-//         case 'Styrofoam':
-//           points = Math.floor(weight * 9);
-//           break;
-//         default:
-//           points = 0;
-//       }
-  
-//     const dbRef = admin.database().ref('users').child(filterEmail(userEmail));
-//     const snapshot = await dbRef.once('value');
-//     const userData = snapshot.val();
-
-//     let updateData = {
-//         weight,
-//         points,
-//         wasteType,
-//       };
-  
-//       if (userData && userData.imageUrl) {
-//         updateData.imageUrl = userData.imageUrl;
-//       }
-  
-//       if (userData && userData.confidence) {
-//         updateData.confidence = userData.confidence;
-//       }
-
-//       await dbRef.update(updateData);
-  
-//       res.status(200).json({points});
-//     } catch (error) {
-//       console.error(error);
-//       res.status(500).json({error: 'Internal server error point'});
-//     }
-//   };
 const calculatePoint = async (req, res) => {
     try {
         const uniqueId = uuidv4();
