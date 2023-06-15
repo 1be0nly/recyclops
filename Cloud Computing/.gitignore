@@ -1,2 +1,6 @@
 node_modules
+
+# GCS service account
 main_api/src/recyclops-prototype.json
+
+main_api/.env

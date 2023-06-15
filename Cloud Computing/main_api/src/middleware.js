@@ -1,7 +1,9 @@
 const admin = require('firebase-admin');
+require('dotenv').config();
 
+const databaseURL = process.env.DATABASE_URL;
 admin.initializeApp({
-    databaseURL: "https://recyclops-prototype-default-rtdb.asia-southeast1.firebasedatabase.app"
+    databaseURL
 });
 
 const verifyToken = async (req, res, next) => {
