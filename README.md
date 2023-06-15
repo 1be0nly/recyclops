@@ -73,6 +73,10 @@ Demo Video:
 
 [Youtube]
 
+## Deploy Server to GCP
+
+[deploy-gcp]
+
 ## Future Update
 
 TBD
@@ -83,6 +87,7 @@ TBD
    [Demo Video]: <https://drive.google.com/file/d/1lUxnFKxhfeuqe0JGoEiejdkDWzt24pa-/view?usp=sharing>
    [Dataset]: <https://www.kaggle.com/datasets/40801637f6f0746c8ee76e66812da0bc51363e1b707737f05085777528a6859a>
    [Youtube]: <https://youtu.be/VPozlOGYTYc>
+   [deploy-gcp]: <https://github.com/1be0nly/recyclops/blob/main/doc/deploy-gcp.md>
    [google cloud storage]: <https://www.npmjs.com/package/@google-cloud/storage>
    [axios]: <https://www.npmjs.com/package/axios>
    [firebase-admin]: <https://www.npmjs.com/package/firebase-admin>
