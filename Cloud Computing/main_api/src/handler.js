@@ -6,6 +6,7 @@ require('dotenv').config();
 const keyFilename = process.env.KEY_FILENAME;
 const projectId = process.env.PROJECT_ID;
 
+// Google Cloud Sotrage Service Account
 const storage = new Storage({
     projectId,
     keyFilename
@@ -24,10 +25,11 @@ const uploadImage = async (req, res) => {
     if (!req.file) {
       return res.status(400).json({error: 'Gambar tidak ditemukan!'});
     }
-
+        const email = req.user.email;
+        const userEmail = filterEmail(email);
         const wasteImage = req.file;
-        const uniqueId = uuidv4();
-        const filename = `${uniqueId}.jpg`;
+        const currentDate = new Date().toISOString().replace(/:/g, '-');
+        const filename = `${userEmail}/${currentDate}.jpg`;
 
         await storage.bucket(bucketName).file(filename).save(wasteImage.buffer, {
             metadata: {
@@ -55,7 +57,6 @@ const uploadImage = async (req, res) => {
 // POST classified to database
 const calculatePoint = async (req, res) => {
     try {
-
         const email = req.user.email;
         const userEmail = filterEmail(email);
         const wasteType = req.body.wasteType;
