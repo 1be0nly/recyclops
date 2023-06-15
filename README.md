@@ -21,7 +21,6 @@ Waste management is an important issue facing many communities, and proper waste
 Waste management is a complex and challenging issue, with environmental, social, and economic implications. Proper waste sorting is essential for reducing contamination and promoting recycling, but traditional waste sorting methods can be confusing and inconvenient for users. An application-based waste sorting system could provide a more efficient and convenient solution to this problem, leveraging the ubiquity of smartphones and the power of technology to simplify waste sorting and promote sustainability. 
 
 ## About Our App
-
 Recyclops (the name is taken from recycle and cyclops, cyclops is the camera’s phone that capture the trash) is a groundbreaking mobile application designed to revolutionize waste management and recycling practices. With its user-friendly interface and innovative features, Recyclops aims to empower individuals and communities to actively participate in sustainable waste management. The app provides a comprehensive solution for waste classification, tracking, and exchange, creating a dynamic platform for waste banks and eco-conscious individuals to connect and contribute to a greener future.
 
 ## Feature
