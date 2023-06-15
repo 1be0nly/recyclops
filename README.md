@@ -35,7 +35,6 @@ Recyclops (the name is taken from recycle and cyclops, cyclops is the camera’s
 
 ## Library for Backend System
 - [google cloud storage]
-- [uuid]
 - [axios]
 - [firebase-admin]
 - [express]
@@ -79,7 +78,6 @@ TBD
    [Dataset]: <https://www.kaggle.com/datasets/40801637f6f0746c8ee76e66812da0bc51363e1b707737f05085777528a6859a>
    [Youtube]: <https://youtu.be/VPozlOGYTYc>
    [google cloud storage]: <https://www.npmjs.com/package/@google-cloud/storage>
-   [uuid]: <https://www.npmjs.com/package/uuid>
    [axios]: <https://www.npmjs.com/package/axios>
    [firebase-admin]: <https://www.npmjs.com/package/firebase-admin>
    [express]: <https://expressjs.com/>
