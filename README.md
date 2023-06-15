@@ -58,7 +58,6 @@ TBD
    [Demo Video]: <https://drive.google.com/file/d/1lUxnFKxhfeuqe0JGoEiejdkDWzt24pa-/view?usp=sharing>
    [Dataset]: <https://www.kaggle.com/datasets/40801637f6f0746c8ee76e66812da0bc51363e1b707737f05085777528a6859a>
    [Youtube]: <https://youtu.be/VPozlOGYTYc>
-   Library used for Back-end System (Node.js NPM) :
    [@google-cloud/storage] : <https://www.npmjs.com/package/@google-cloud/storage>
    [uuid] : <https://www.npmjs.com/package/uuid>
    [axios]: <https://www.npmjs.com/package/axios>
