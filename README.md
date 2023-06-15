@@ -42,6 +42,12 @@ Recyclops (the name is taken from recycle and cyclops, cyclops is the camera’s
 - [body-parser]
 - [routes]
 - [dotenv]
+- [requests]
+- [numpy]
+- [flask]
+- [tensorflow]
+- [tensorflow hub]
+- [pillow]
 
 ## Library for Android Application
 - [RecyclerView] 
@@ -85,6 +91,12 @@ TBD
    [body-parser]: <https://www.npmjs.com/package/body-parser>
    [routes]: <https://expressjs.com/en/guide/routing.html>
    [dotenv]: <https://www.npmjs.com/package/dotenv>
+   [requests]: <https://requests.readthedocs.io/en/latest/>
+   [numpy]: <https://numpy.org/>
+   [flask]: <https://flask.palletsprojects.com/en/2.3.x/>
+   [tensorflow]: <https://www.tensorflow.org/>
+   [tensorflow hub]: <https://www.tensorflow.org/hub/>
+   [pillow]: <https://pillow.readthedocs.io/en/stable/>
    [RecyclerView]: <https://developer.android.com/jetpack/androidx/releases/recyclerview>
    [Lifecycle]: <https://developer.android.com/jetpack/androidx/releases/lifecycle>
    [Glide]: <https://github.com/bumptech/glide>
