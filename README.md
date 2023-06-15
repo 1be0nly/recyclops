@@ -40,6 +40,18 @@ Recyclops (the name is taken from recycle and cyclops, cyclops is the camera’s
 - [body-parser]
 - [routes]
 
+## Library for Android Application
+- [RecyclerView] 
+- [Lifecycle] 
+- [Glide] 
+- [Retrofit 2]  
+- [Material Design]
+- [Datastore]
+- [Firebase Ui Auth]
+- [CameraX] 
+- [Google Play Services] 
+- [Firebase Auth]
+
 ## Deployed Link
 
 Deployed APK:
@@ -70,3 +82,13 @@ TBD
    [multer]: <https://www.npmjs.com/package/multer>
    [body-parser]: <https://www.npmjs.com/package/body-parser>
    [routes]: <https://expressjs.com/en/guide/routing.html>
+   [RecyclerView]: <https://developer.android.com/jetpack/androidx/releases/recyclerview>
+   [Lifecycle]: <https://developer.android.com/jetpack/androidx/releases/lifecycle>
+   [Glide]: <https://github.com/bumptech/glide>
+   [Retrofit 2]:  <https://square.github.io/retrofit/>
+   [Material Design]: <https://github.com/material-components/material-components-android>
+   [Datastore]: <https://developer.android.com/topic/libraries/architecture/datastore?gclid=CjwKCAiA55mPBhBOEiwANmzoQtX8aFaxx5WFTDOpYVN429tF3U8X3BnZu8ZMfJhRqGtyme_PzaypHhoCQDsQAvD_BwE&gclsrc=aw.ds#datastore-preferences>
+   [Firebase Ui Auth]: <https://github.com/firebase/FirebaseUI-Android>
+   [CameraX]: <https://developer.android.com/training/camerax?hl=id>
+   [Google Play Services]:  <https://developer.android.com/distribute/play-services>
+   [Firebase Auth]: <https://firebase.google.com/docs/auth/android/start> 
