@@ -1,4 +1,4 @@
-node_modules
+main_api/node_modules
 
 # GCS service account
 main_api/src/recyclops-prototype.json
