@@ -4,12 +4,14 @@ Bangkit Capstone Project C23-PS254
 Team ID: C23-PS254
 Selected Themes/Case: Sustainable Living
 Member Name:
-- (ML) M151DSX1309– Fathur Rahman Al Farizy – Universitas Brawijaya
-- (ML) M367DSX0217– Indra Septiawan – Universitas Tulungagung
-- (CC) C086DSX0958– Muhammad Safari Firdaus – Sekolah Tinggi Teknologi Bandung
-- (CC) C086DSX0658– Zidane Putra Andriant – Sekolah Tinggi Teknologi Bandung
-- (MD) A150DSX1077– Daffa Aditya Rahman– Universitas Bina Sarana Informatika
-- (MD) A086DSX1261– Abdurrahman Shahab – Sekolah Tinggi Teknologi Bandung
+| Learning Path | Name | ID | Asal Universitas |
+| ------ | ------ | ------ | ------ |
+| Machine Learning | Fathur Rahman Al Farizy | M151DSX1309 | Universitas Brawijaya
+| Machine Learning | Indra Septiawan | M367DSX0217 | Universitas Tulungagung
+| Cloud Computing | Muhammad Safari Firdaus | C086DSX0958 | Sekolah Tinggi Teknologi Bandung
+| Cloud Computing | Zidane Putra Andriant | C086DSX0658 | Sekolah Tinggi Teknologi Bandung
+| Mobile Development | Daffa Aditya Rahman | A150DSX1077 | Universitas Bina Sarana Informatika
+| Mobile Development | Abdurrahman Shahab | A086DSX1261 | Sekolah Tinggi Teknologi Bandung
 
 ## Backgrounder
 Waste management is an important issue facing many communities, and proper waste sorting is crucial for reducing contamination and promoting recycling. However, traditional waste sorting methods can be confusing and inconvenient for users, leading to contamination and reduced recycling rates. An application-based waste sorting system could provide a more efficient and convenient solution to this problem.
