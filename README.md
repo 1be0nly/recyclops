@@ -1,4 +1,7 @@
 # RECYCLOPS
+
+![](doc/Recyclops.png)
+
 Bangkit Capstone Project 2023
 
 Team ID: C23-PS254
@@ -24,6 +27,7 @@ Waste management is a complex and challenging issue, with environmental, social,
 Recyclops (the name is taken from recycle and cyclops, cyclops is the camera’s phone that capture the trash) is a groundbreaking mobile application designed to revolutionize waste management and recycling practices. With its user-friendly interface and innovative features, Recyclops aims to empower individuals and communities to actively participate in sustainable waste management. The app provides a comprehensive solution for waste classification, tracking, and exchange, creating a dynamic platform for waste banks and eco-conscious individuals to connect and contribute to a greener future.
 
 ## Feature
+![](doc/features.png)
 
 ## Dataset Link
 
