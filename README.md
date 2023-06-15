@@ -2,7 +2,9 @@
 Bangkit Capstone Project C23-PS254
 
 Team ID: C23-PS254
+
 Selected Themes/Case: Sustainable Living
+
 Member Name:
 | Learning Path | Name | ID | Asal Universitas |
 | ------ | ------ | ------ | ------ |
