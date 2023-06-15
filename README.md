@@ -11,7 +11,7 @@ Member Name:
 - (MD) A150DSX1077– Daffa Aditya Rahman– Universitas Bina Sarana Informatika
 - (MD) A086DSX1261– Abdurrahman Shahab – Sekolah Tinggi Teknologi Bandung
 
-## Backgrouder
+## Backgrounder
 Waste management is an important issue facing many communities, and proper waste sorting is crucial for reducing contamination and promoting recycling. However, traditional waste sorting methods can be confusing and inconvenient for users, leading to contamination and reduced recycling rates. An application-based waste sorting system could provide a more efficient and convenient solution to this problem.
 
 Waste management is a complex and challenging issue, with environmental, social, and economic implications. Proper waste sorting is essential for reducing contamination and promoting recycling, but traditional waste sorting methods can be confusing and inconvenient for users. An application-based waste sorting system could provide a more efficient and convenient solution to this problem, leveraging the ubiquity of smartphones and the power of technology to simplify waste sorting and promote sustainability. 
