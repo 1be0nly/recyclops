@@ -42,6 +42,7 @@ Recyclops (the name is taken from recycle and cyclops, cyclops is the camera’s
 - [multer]
 - [body-parser]
 - [routes]
+- [dotenv]
 
 ## Library for Android Application
 - [RecyclerView] 
@@ -85,6 +86,7 @@ TBD
    [multer]: <https://www.npmjs.com/package/multer>
    [body-parser]: <https://www.npmjs.com/package/body-parser>
    [routes]: <https://expressjs.com/en/guide/routing.html>
+   [routes]: <https://expressjs.com/en/guide/routing.html](https://www.npmjs.com/package/dotenv>
    [RecyclerView]: <https://developer.android.com/jetpack/androidx/releases/recyclerview>
    [Lifecycle]: <https://developer.android.com/jetpack/androidx/releases/lifecycle>
    [Glide]: <https://github.com/bumptech/glide>
@@ -94,4 +96,5 @@ TBD
    [Firebase Ui Auth]: <https://github.com/firebase/FirebaseUI-Android>
    [CameraX]: <https://developer.android.com/training/camerax?hl=id>
    [Google Play Services]:  <https://developer.android.com/distribute/play-services>
-   [Firebase Auth]: <https://firebase.google.com/docs/auth/android/start> 
+   [Firebase Auth]: <https://firebase.google.com/docs/auth/android/start>
+  
