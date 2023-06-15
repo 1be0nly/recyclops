@@ -26,6 +26,16 @@ Recyclops (the name is taken from recycle and cyclops, cyclops is the camera’s
 
 [Dataset]
 
+## Library for Backend System
+- [@google-cloud/storage]
+- [uuid]
+- [axios]
+- [firebase-admin]
+- [express]
+- [multer]
+- [body-parser]
+- [routes]
+
 ## Deployed Link
 
 Deployed APK:
@@ -48,3 +58,12 @@ TBD
    [Demo Video]: <https://drive.google.com/file/d/1lUxnFKxhfeuqe0JGoEiejdkDWzt24pa-/view?usp=sharing>
    [Dataset]: <https://www.kaggle.com/datasets/40801637f6f0746c8ee76e66812da0bc51363e1b707737f05085777528a6859a>
    [Youtube]: <https://youtu.be/VPozlOGYTYc>
+   Library used for Back-end System (Node.js NPM) :
+   [@google-cloud/storage] : <https://www.npmjs.com/package/@google-cloud/storage>
+   [uuid] : <https://www.npmjs.com/package/uuid>
+   [axios]: <https://www.npmjs.com/package/axios>
+   [firebase-admin]: <https://www.npmjs.com/package/firebase-admin>
+   [express]: <https://expressjs.com/>
+   [multer]: <https://www.npmjs.com/package/multer>
+   [body-parser]: <https://www.npmjs.com/package/body-parser>
+   [routes]: <https://expressjs.com/en/guide/routing.html>
