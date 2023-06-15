@@ -1,5 +1,5 @@
 # RECYCLOPS
-Bangkit Capstone Project C23-PS254
+Bangkit Capstone Project 2023
 
 Team ID: C23-PS254
 
