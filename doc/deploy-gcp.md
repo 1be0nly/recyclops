@@ -23,7 +23,7 @@ This is the step to manually deploy the server to Google Cloud Platform. Here ar
     ```
     gsutil mb -c standard -l asia-southeast1 gs://recylops-bucket
     ```
-    __Highly RECOMMENDED bucket name:__ ***recyclops-bucket***
+    >__Highly RECOMMENDED bucket name:__ ***recyclops-bucket***
 
 3. Generate a Service Account key for Cloud Storage (Cloud Storage Object Creator).
 4. Rename the Service Account to **recyclops-prototype.json** and save it to **recyclops/'Cloud Computing'/src/**.
