@@ -75,7 +75,7 @@ For video presentation link, check this [Youtube].
 
 ## Deploy Server to GCP
 
-Documentation on deploying to Google Cloud Platform, check this [gcp-deploy].
+Documentation on deploying to Google Cloud Platform, check this [deploy-gcp].
 
 ## Future Update
 
