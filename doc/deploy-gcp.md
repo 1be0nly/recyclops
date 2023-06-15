@@ -95,7 +95,7 @@ This is the step to manually deploy the server to Google Cloud Platform. Here ar
 
 ## Firebase
 
-__NOTE : Make sure to use SAME ACCOUNT as GOOGLE CLOUD CONSOLE__
+__NOTE : Make sure to use SAME ACCOUNT as GOOGLE CLOUD PROJECT__
 1. Create a new Firebase project name **SAME** as **Google Cloud Project**.
 2. Enable the Realtime Database in the Firebase project, copy and save the URL Database for later use.
 3. Enable Google Sign-In as the authentication sign-in method in the Firebase.
