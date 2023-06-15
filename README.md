@@ -67,15 +67,15 @@ Deployed APK:
 [Recyclops.Apk] 
 
 Demo Video:
-[Demo Video]    
+Here is the demo from our App, check this [Demo Video].
 
 ## 10 Min Presentation Link
 
-[Youtube]
+For video presentation link, check this [Youtube].
 
 ## Deploy Server to GCP
 
-[deploy-gcp]
+Documentation on deploying to Google Cloud Platform, check this [gcp-deploy].
 
 ## Future Update
 
