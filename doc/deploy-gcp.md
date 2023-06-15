@@ -97,7 +97,7 @@ This is the step to manually deploy the server to Google Cloud Platform. Here ar
 
 __NOTE : Make sure to use SAME ACCOUNT as GOOGLE CLOUD CONSOLE__
 1. Create a new Firebase project name **SAME** as **Google Cloud Project**.
-2. Enable the Realtime Database in the Firebase project.
+2. Enable the Realtime Database in the Firebase project, copy and save the URL Database for later use.
 3. Enable Google Sign-In as the authentication sign-in method in the Firebase.
 4. Generate a Service Account key and  copy SHA-1 in the Firebase project settings.
 5. Use the Service Account and SHA-1 for MD (Android Code).
