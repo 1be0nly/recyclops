@@ -1,4 +1,4 @@
-# recyclops
+# RECYCLOPS
 Bangkit Capstone Project C23-PS254
 
 Team ID: C23-PS254
