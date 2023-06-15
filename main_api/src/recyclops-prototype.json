@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "recyclops-prototype",
+  "private_key_id": "60f8a35a5be344e32095c890c569f68b641e19ad",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC9HXrMU+jZgmy3\nHQTy+/oPHHwPK+xHk1stMO1hKFR4Ym3WHyL/3/yqr/u+k5YrRYq6IUrPH8C6Obyq\nS0OC1OGLkeB1sDUVDo/B32w3gS+ZZrL2/H8Hu/IPm81e/tamFOQHkfmlz1wTxCS4\n3IcYGeVTBDahrmfDyt1M8oCIlk6xyGpnq2pzLx6NY5gMoiJBcC2t9Zc2UFLVTxGr\nkrtGhDus8iVOW2RrehL9qz4tPcm9QhOe0aNMtWW+gWUJk5YI1uTdA6p3toL4PswZ\n/rIwKoxm2FjbZdqfke1UluJEWIZCxgCGKQmnPESZj1mB5tma+ah8M4kxzpC2VQJK\ntqzAa9aFAgMBAAECggEABRvnRd7ccwfZfQbtK81P35mi5lwG6ZYbB/kC6LWItqne\nEsNLlEMOVeQkNm1RSMD7svSUS00tzTojFSysWbv7jeQ2fqdwf62hh5jMGSHF0eya\n2B5RJjnXG8HXRgI3dUwqLuQsLOURtTz+yvm2Mpn8foYmHa8TAZCY8uu4OjhpTtcx\n0kZUZHCZKWAPrWk5VDquoXoy3giyZjDd8XGiGcZi6VLQklswm4su45++Mb/p5B8h\necQMR2QEYmw3Ea5simHkEMx1g3GhYwPY7U/YuaJWApb7zZyekZtG2UKHxNOcQ12r\n8whirZ70MFYdR1O/nTXrG8lE+IbsV/Z1Upg2v8GRvwKBgQDra8k1HMM54yp++wtv\nPHBWxtO4dNwrMYVQmn3TLwoU+/bgLso1NToWVh8AZ1P1gIHMv5Dro+8SN6NHfuf9\njaM64CNIYcv99DnbxcqWvoQp02FYG5Njdpfy7hs+3BpKmffg7UwtkYe44cBftuuc\nSiAfOeTTnlpwvSoxnmHtING1nwKBgQDNpXfWOrvD/bFRiS4yaWq2kEHY8DhNrwcd\nMvo5E5M1/NwNpchsfDC+AHPnYWgJli2TA8JD7BybnVZYQs8iFqXmLtRWPjyHF1xa\nXTNzgNLBAVsKNM7lmHqr4bFZnRvhJfV6qRS2x3ZBEQzYLwj791e4AUI8ugCv29f+\nt9Ih4MRZWwKBgQC53BKx189ZODsonNHeM/0MxVQJYFkh0KrLg+yqeYygHHw/aTFC\n6I6/a6Z2Dx19yMKw/txO7NGltD84BrzotJWVubahQnRmPhYfp/vVHvwAeV10zfCC\nqfI0XD8uVV58XyoPbciigS6Bi9jwt90zOmI5xN8fIvmL4AwbuErfhvWJSQKBgHrX\nWNpTg030ATPfagUbC2+6hFr+Q+PDpdA/X1Ew7ELXpOtSGIMVPFiDFLkmamsvllG3\ncRf5tq0OM0HNxsVqGfeCCbzquGVKAxTHj7BzR3GbSbKzENP9XWnHC5WoT7sSXazD\ny2fThkQf1zhcAFXizjdQKSz1PuvNuxyg2Zj7Fs75AoGBANzMgeeDP7zRcNfHXEHe\n1qvXcSO4eqekU1/yrKn3CsJnKbLgqVeOv02E6p8BPH11dif6ktAX9MFb8m6iJzQx\nTq4NwW/6UhDIStWptS01gn5dNmnPg7h8Y1AqyiS5w7AiSUi6oswxOnwqiI5fiNS1\n07O6+aQRrwfDfxE1hzVBBm0C\n-----END PRIVATE KEY-----\n",
+  "client_email": "bucket-recyclops@recyclops-prototype.iam.gserviceaccount.com",
+  "client_id": "117919340005089528218",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/bucket-recyclops%40recyclops-prototype.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
