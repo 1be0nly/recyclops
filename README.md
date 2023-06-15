@@ -1,4 +1,4 @@
-# RECYCLOPS
+# Recyclops
 
 ![](doc/Recyclops.png)
 
