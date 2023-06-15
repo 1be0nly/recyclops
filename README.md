@@ -67,7 +67,7 @@ Deployed APK:
 [Recyclops.Apk] 
 
 Demo Video:
-Here is the demo from our App, check this [Demo Video].
+[Demo Video].
 
 ## 10 Min Presentation Link
 
