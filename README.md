@@ -69,10 +69,6 @@ Deployed APK:
 Demo Video:
 [Demo Video].
 
-## 10 Min Presentation Link
-
-For video presentation link, check this [Youtube].
-
 ## Deploy Server to GCP
 
 Documentation on deploying to Google Cloud Platform, check this [deploy-gcp].
