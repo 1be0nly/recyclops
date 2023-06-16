@@ -21,9 +21,8 @@ This is the step to manually deploy the server to Google Cloud Platform. Here ar
     ```
 2. Create a bucket using Cloud Shell Terminal :
     ```
-    gsutil mb -c standard -l asia-southeast1 gs://recylops-bucket
+    gsutil mb -c standard -l asia-southeast1 gs://<your bucket name>
     ```
-    >__Highly RECOMMENDED bucket name:__ ***recyclops-bucket***
 
 3. Generate a Service Account key for Cloud Storage (Cloud Storage Object Creator).
 4. Rename the Service Account to **recyclops-prototype.json** and save it to **recyclops/'Cloud Computing'/src/**.
@@ -96,10 +95,10 @@ This is the step to manually deploy the server to Google Cloud Platform. Here ar
 ## Firebase
 
 __NOTE : Make sure to use SAME ACCOUNT as GOOGLE CLOUD PROJECT__
-1. Create a new Firebase project name **SAME** as **Google Cloud Project**.
+1. Create a new Firebase project and choose **Project Name** same as GCP.
 2. Enable the Realtime Database in the Firebase project, copy and save the URL Database for later use.
 3. Enable Google Sign-In as the authentication sign-in method in the Firebase.
-4. Generate a Service Account key and  copy SHA-1 in the Firebase project settings.
+4. Generate a Service Account key and copy SHA-1 in the Firebase project settings.
 5. Use the Service Account and SHA-1 for MD (Android Code).
 
 ## Environment Variables
@@ -116,8 +115,8 @@ __NOTE : Make sure to use SAME ACCOUNT as GOOGLE CLOUD PROJECT__
     ```
     BUCKET_NAME = '<YOUR BUCKET NAME>'
     FLASK_API_URL = '<YOUR CLOUD RUN ML API URL>' 
-    DATABASE_URL = '<YOUR REALTIME DATABSAE FIREBASE>' 
-    KEY_FILENAME = '<YOUR CLOUD STORAGE SERVICE ACCOUNT>' 
+    DATABASE_URL = '<YOUR REALTIME DATABASE URL>' 
+    KEY_FILENAME = '<PATH TO YOUR CLOUD STORAGE SERVICE ACCOUNT>' 
     ```
 4. Re-deploy the **Main API** and **ML API**.
 5. Use the **Main API URL** for MD (Android Code).
