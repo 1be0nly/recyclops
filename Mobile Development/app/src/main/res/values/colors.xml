@@ -11,4 +11,6 @@
     <color name="green_secondary">#97BF7A</color>
     <color name="green_dark">#132623</color>
     <color name="red">#D10A0A</color>
+    <color name="grey">#716F6F</color>
+    <color name="card_view_grey">#40ADADAD</color>
 </resources>
