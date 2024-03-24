@@ -1,24 +1,15 @@
 package com.example.recyclops.ui.login
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.preferencesDataStore
-import androidx.lifecycle.ViewModelProvider
-import com.example.recyclops.ui.main.MainActivity
-import com.example.recyclops.R
+import androidx.appcompat.app.AppCompatActivity
 import com.example.recyclops.databinding.ActivityLoginBinding
-import com.example.recyclops.repository.TokenPreferences
-import com.example.recyclops.ui.register.RegisterActivity
+import com.example.recyclops.ui.main.MainActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -30,8 +21,6 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-
-val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "token")
 
 class LoginActivity : AppCompatActivity() {
 
@@ -46,23 +35,16 @@ class LoginActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
+        binding.container.isEnabled = false
+
         binding.btnLogin.setOnClickListener {
-            Toast.makeText(this, "Fitur Ini Masih Dalam Perkembangan,\n" +
-                    "Silahkan Login Menggunakan Google", Toast.LENGTH_LONG).show()
-        }
-
-        binding.btnLoginGoogle.setOnClickListener {
             signIn()
-        }
-
-        binding.tvLoginDaftar.setOnClickListener{
-            startActivity(Intent(this, RegisterActivity::class.java))
         }
 
         // Configure Google Sign In
         val gso = GoogleSignInOptions
             .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestIdToken(getString(com.firebase.ui.auth.R.string.default_web_client_id))
             .requestEmail()
             .build()
 
@@ -73,16 +55,13 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun showLoading(state: Boolean) {
-        if (state) {
-            binding.progressBar.visibility = View.VISIBLE
-        } else {
-            binding.progressBar.visibility = View.GONE
-        }
+        binding.container.isRefreshing = state
     }
 
     private fun signIn() {
         val signInIntent = googleSignInClient.signInIntent
         resultLauncher.launch(signInIntent)
+        Log.d(TAG, "signIn: test")
     }
 
     private var resultLauncher: ActivityResultLauncher<Intent> = registerForActivityResult(
@@ -90,7 +69,8 @@ class LoginActivity : AppCompatActivity() {
     ) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
             showLoading(true)
-            val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(result.data)
+            val task: Task<GoogleSignInAccount> =
+                GoogleSignIn.getSignedInAccountFromIntent(result.data)
             try {
                 // Google Sign In was successful, authenticate with Firebase
                 val account: GoogleSignInAccount = task.getResult(ApiException::class.java)!!
@@ -98,7 +78,7 @@ class LoginActivity : AppCompatActivity() {
                 firebaseAuthWithGoogle(account.idToken!!)
             } catch (e: ApiException) {
                 // Google Sign In failed, update UI appropriately
-                Log.w(TAG, "Google sign in failed", e)
+                Log.d(TAG, "Google sign in failed, $e")
             }
         }
     }
@@ -111,17 +91,13 @@ class LoginActivity : AppCompatActivity() {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "signInWithCredential:success")
                     Toast.makeText(this, "berhasil", Toast.LENGTH_SHORT).show()
-                    val pref = TokenPreferences.getInstance(dataStore)
-                    val loginViewModel = ViewModelProvider(this, LoginViewModelFactory(pref)).get(
-                        LoginViewModel::class.java
-                    )
-                    loginViewModel.saveToken(idToken)
                     val user = auth.currentUser
                     showLoading(false)
                     updateUI(user)
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "signInWithCredential:failure", task.exception)
+                    Log.d(TAG, "fail")
                     Toast.makeText(this, "gagal", Toast.LENGTH_SHORT).show()
                     showLoading(false)
                     updateUI(null)

@@ -15,8 +15,7 @@ class HistoryAdapter(private val listSetoran: ArrayList<UserHistoryItem>) : Recy
             binding.apply {
                 val berat = setoran.weight
                 val quantity = "$berat KG"
-                val point = setoran.points.toString()
-                val _point = "$point Point"
+                val point = setoran.points.toString() + " point"
                 Glide.with(itemView)
                     .load(setoran.imageUrl)
                     .transition(DrawableTransitionOptions.withCrossFade())
@@ -24,7 +23,7 @@ class HistoryAdapter(private val listSetoran: ArrayList<UserHistoryItem>) : Recy
                     .into(ivHistory)
                 tvHistoryNama.text = setoran.wasteType
                 tvHistroyQuantity.text = quantity
-                tvHistoryPoint.text = _point
+                tvHistoryPoint.text = point
             }
         }
     }

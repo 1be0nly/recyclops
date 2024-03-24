@@ -4,48 +4,50 @@ import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.text.LineBreaker.JUSTIFICATION_MODE_INTER_WORD
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.view.Window
-import android.widget.Button
-import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.example.recyclops.R
-import com.example.recyclops.api.FileUploadResponse
-import com.example.recyclops.api.ResponseInterface
-import com.example.recyclops.data.TrashScanned
 import com.example.recyclops.databinding.ActivityCameraPreviewBinding
+import com.example.recyclops.databinding.LayoutTriviaBinding
 import com.example.recyclops.databinding.LayoutYesnoDialogBinding
-import com.example.recyclops.repository.TokenPreferences
-import com.example.recyclops.ui.login.dataStore
 import com.example.recyclops.ui.main.MainActivity
+import com.example.recyclops.ui.utils.getTrivia
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.auth.FirebaseAuth
+import kotlin.math.roundToInt
 
 class CameraPreviewActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCameraPreviewBinding
     private lateinit var bindingDialog: LayoutYesnoDialogBinding
+    private lateinit var bindingBottomSheetDialog: LayoutTriviaBinding
+    private lateinit var wasteType: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
-       super.onCreate(savedInstanceState)
+        super.onCreate(savedInstanceState)
         binding = ActivityCameraPreviewBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val pref = TokenPreferences.getInstance(dataStore)
-        val viewModel = ViewModelProvider(this, ImageConfirmViewModelFactory(pref))[CameraPreviewViewModel::class.java]
+        val viewModel = ViewModelProvider(this)[CameraPreviewViewModel::class.java]
 
         val imageUrl = intent.getStringExtra("imageUrl").toString()
-        val wasteType = intent.getStringExtra("wasteType")
+        wasteType = intent.getStringExtra("wasteType").toString()
         val confidence = intent.getStringExtra("confidence").toString().toFloat()
+        val confidencePercentage = (confidence * 100).roundToInt()
 
-        onBackPressedDispatcher.addCallback(this, object: OnBackPressedCallback(true) {
+
+        if (supportActionBar != null) {
+            supportActionBar!!.hide()
+        }
+
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 val intent = Intent(this@CameraPreviewActivity, MainActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -54,10 +56,19 @@ class CameraPreviewActivity : AppCompatActivity() {
             }
         })
 
-        binding.btnPreviewSend.setOnClickListener{
-            if (binding.tfPreviewWeight.text!!.isNotEmpty()){
+        binding.btnPreviewSend.setOnClickListener {
+            if (binding.tfPreviewWeight.text!!.isEmpty()) {
+
+                binding.tfPreviewWeight.error = "Silahkan Masukkan Berat Sampah Terlebih Dahulu"
+                binding.tfPreviewWeight.requestFocus()
+
+            } else if (binding.tfPreviewWeight.text!!.toString().toInt() <= 0) {
+
+                binding.tfPreviewWeight.error = "Berat Tidak Boleh Kurang Dari Sama Dengan 0"
+                binding.tfPreviewWeight.requestFocus()
+
+            } else {
                 showLoading(true)
-                val wasteType = binding.tvPreviewType.text.toString()
                 val weight = binding.tfPreviewWeight.text.toString().toInt()
                 val mUser = FirebaseAuth.getInstance().currentUser
                 mUser!!.getIdToken(true)
@@ -67,22 +78,29 @@ class CameraPreviewActivity : AppCompatActivity() {
                             val idToken: String? = task.result.token
                             val status = "Berhasil"
                             val message = "Scan Lagi ?"
-                            viewModel.uploadImageConfirmation("Bearer $idToken",wasteType,weight, imageUrl, confidence)
-                            showYesNoDialog(status,message)
+                            viewModel.uploadImageConfirmation(
+                                "Bearer $idToken",
+                                wasteType,
+                                weight,
+                                imageUrl,
+                                confidence
+                            )
+                            showYesNoDialog(status, message)
                             Log.d("upload", "$idToken,$wasteType,$weight")
                             Log.d("token", idToken.toString())
                         } else {
                             showLoading(false)
                             val status = "Gagal ${task.exception}"
                             val message = "Scan Lagi ?"
-                            showYesNoDialog(status,message)
+                            showYesNoDialog(status, message)
                             Log.d("Exception", task.exception.toString())
                         }
                     }
-            }else{
-                binding.tfPreviewWeight.error = "Silahkan Masukkan Berat Sampah Terlebih Dahulu"
-                binding.tfPreviewWeight.requestFocus()
             }
+        }
+
+        binding.btnTrivia.setOnClickListener {
+            showTrivia(wasteType)
         }
 
         binding.apply {
@@ -91,19 +109,16 @@ class CameraPreviewActivity : AppCompatActivity() {
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .centerCrop()
                 .into(ivPreviewTrash)
-            tvPreviewType.text = wasteType
+            val previewType = "$wasteType ($confidencePercentage%)"
+            tvPreviewType.text = previewType
         }
     }
 
     private fun showLoading(state: Boolean) {
-        if (state) {
-            binding.progressBar.visibility = View.VISIBLE
-        } else {
-            binding.progressBar.visibility = View.GONE
-        }
+        binding.container.isRefreshing = state
     }
 
-    private fun showYesNoDialog(status:String, message: String) {
+    private fun showYesNoDialog(status: String, message: String) {
         val dialog = Dialog(this)
         bindingDialog = LayoutYesnoDialogBinding.inflate(layoutInflater)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -115,24 +130,32 @@ class CameraPreviewActivity : AppCompatActivity() {
             tvDialog.text = message
             tvStatus.text = status
 
-            btnYes.setOnClickListener{
+            btnYes.setOnClickListener {
                 startActivity(Intent(this@CameraPreviewActivity, CameraActivity::class.java))
             }
 
-            btnNo.setOnClickListener{
+            btnNo.setOnClickListener {
                 startActivity(Intent(this@CameraPreviewActivity, MainActivity::class.java))
             }
         }
         dialog.show()
     }
 
-    //override fun fileUploadResponseAdded(fileUploadResponse: FileUploadResponse) {
-       // binding.apply {
-            //Glide.with(this@CameraPreviewActivity)
-                //.load(fileUploadResponse.imageUrl)
-                //.transition(DrawableTransitionOptions.withCrossFade())
-                //.centerCrop()
-                //.into(ivPreviewTrash)
-           // tvPreviewType.text = fileUploadResponse.wasteType
-       // }
+    private fun showTrivia(wasteType: String) {
+        val bottomSheetDialog = BottomSheetDialog(this)
+        bindingBottomSheetDialog = LayoutTriviaBinding.inflate(layoutInflater)
+        bottomSheetDialog.setCancelable(true)
+        bottomSheetDialog.setContentView(bindingBottomSheetDialog.root)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            bindingBottomSheetDialog.tvTrivia.justificationMode = JUSTIFICATION_MODE_INTER_WORD
+        }
+
+        bindingBottomSheetDialog.apply {
+            tvWasteType.text = wasteType
+            tvTrivia.text = getTrivia(wasteType)
+        }
+
+        bottomSheetDialog.show()
+    }
 }

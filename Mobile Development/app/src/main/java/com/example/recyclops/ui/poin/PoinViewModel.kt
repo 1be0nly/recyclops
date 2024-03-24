@@ -1,7 +1,6 @@
 package com.example.recyclops.ui.poin
 
 import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.recyclops.api.ApiConfig
@@ -16,7 +15,7 @@ class PoinViewModel : ViewModel() {
     val point
         get() = _point
 
-    fun getUserPoint(token: String){
+    fun getUserPoint(token: String) {
         val apiService = ApiConfig().getApiService()
         val uploadImageRequest = apiService.getUserPoint(token)
         uploadImageRequest.enqueue(object : Callback<GetUserPointResponse> {
@@ -25,8 +24,8 @@ class PoinViewModel : ViewModel() {
                 response: Response<GetUserPointResponse>
             ) {
                 val responseBody = response.body()
-                if (response.isSuccessful){
-                    if (responseBody != null){
+                if (response.isSuccessful) {
+                    if (responseBody != null) {
                         _point.value = responseBody
                     }
                 }

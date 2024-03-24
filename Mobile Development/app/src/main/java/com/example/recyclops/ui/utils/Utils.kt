@@ -76,3 +76,25 @@ fun uriToFile(selectedImg: Uri, context: Context): File {
     return myFile
 }
 
+fun getTrivia(wasteType: String): String {
+    val plastik = "Plastik adalah sampah yang materialnya diproduksi dari bahan kimia tak terbarukan. Sampah sampah plastik dapat terurai di tanah 1000 tahun lamanya, sedangkan kantong plastik 10 hingga 1000 tahun. Botol plastik dapat terurai di alam sekitar 450 tahun."
+    val kaca = "Sampah kaca adalah yang berasal dari pecahan kaca botol bekas minuman, parfum, pecahan kaca mobil maupun jendela rumah. Sampah jenis ini memerlukan waktu hingga 1.000.000 tahun untuk terurai sepenuhnya, jika tidak segera di daur ulang."
+    val kardus = "Kardus atau karton box merupakan salah satu material yang punya karakteristik ringan juga praktis. Barangnya yang mudah didapat dan terjangkau menjadikan kardus pilihan terbaik sebagai wadah kemasan dan penyimpanan jika dibandingkan dengan plastik."
+    val logam = "Limbah logam merupakan limbah yang mudah dipisahkan dari timbunan sampah dan dapat didaur ulang menjadi barang – barang yang bernilai seni, dilebur kembali sebagai menjadi material asalnya, dan juga dapat dimanfaatkan sebagai campuran semen dan sebagainya."
+    val kertas = "Limbah kertas merupakan bahan buangan sisa proses produksi maupun pemakaian yang mengandung berbagai komponen seperti selulosa, hemiselulosa, lignin, bahan ekstraktif, larutan Cl2, hidrogen peroksida, asam parasetat, dan sebagainya."
+
+    if (wasteType.equals("Plastik", ignoreCase = true)){
+        return plastik
+    } else if (wasteType.equals("Kaca", ignoreCase = true)){
+        return kaca
+    } else if (wasteType.equals("Kardus", ignoreCase = true)){
+        return kardus
+    } else if (wasteType.equals("Logam", ignoreCase = true)){
+        return logam
+    } else if (wasteType.equals("Kertas", ignoreCase = true)){
+        return kertas
+    } else {
+        return "Error"
+    }
+}
+

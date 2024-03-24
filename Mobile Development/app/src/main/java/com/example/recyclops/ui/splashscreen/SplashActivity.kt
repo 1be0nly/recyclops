@@ -11,6 +11,7 @@ import android.os.Looper
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
+import androidx.appcompat.app.AppCompatDelegate
 import com.example.recyclops.databinding.ActivitySplashBinding
 import com.example.recyclops.ui.login.LoginActivity
 
@@ -22,6 +23,8 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
         hideSystemUI()
         playAnimation()

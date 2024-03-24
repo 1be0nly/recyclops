@@ -3,13 +3,13 @@ package com.example.recyclops.ui.camera
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
@@ -18,6 +18,7 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import com.example.recyclops.databinding.ActivityCameraBinding
 import com.example.recyclops.ui.home.HomeFragment
+import com.example.recyclops.ui.imageconfirmation.ImageConfirmationActivity
 import com.example.recyclops.ui.utils.uriToFile
 import java.io.File
 import java.text.SimpleDateFormat

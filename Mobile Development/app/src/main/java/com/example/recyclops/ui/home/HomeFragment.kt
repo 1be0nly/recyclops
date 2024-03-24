@@ -1,7 +1,6 @@
 package com.example.recyclops.ui.home
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
@@ -11,19 +10,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
-import androidx.cardview.widget.CardView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.recyclops.R
 import com.example.recyclops.data.UserHistoryItem
 import com.example.recyclops.databinding.FragmentHomeBinding
-import com.example.recyclops.ui.camera.CameraActivity
 import com.example.recyclops.ui.history.HistoryActivity
-import com.example.recyclops.ui.login.LoginActivity
-import com.example.recyclops.ui.maps.MapsActivity
 import com.google.firebase.auth.FirebaseAuth
 
 class HomeFragment : Fragment() {
@@ -50,7 +44,13 @@ class HomeFragment : Fragment() {
         adapter = SetoranAdapter()
         showRecyclerList()
 
-        binding.tvHomeSetoran.setOnClickListener{
+        val user = homeViewModel.user
+
+        if (_binding != null && user != null){
+                binding.nama.text = user.displayName
+        }
+
+        binding.tvHomeSetoran.setOnClickListener {
             startActivity(Intent(requireContext(), HistoryActivity::class.java))
         }
 
@@ -62,17 +62,11 @@ class HomeFragment : Fragment() {
             )
         }
 
-        val camera: CardView = binding.cvCamera
-        camera.setOnClickListener {
-            val intent = Intent(requireActivity(), CameraActivity::class.java)
-            startActivity(intent)
+        binding.container.setOnRefreshListener {
+            binding.container.isRefreshing = false
+            getAllRVData()
         }
 
-        val maps: CardView = binding.cvBankSampah
-        maps.setOnClickListener {
-            val intent = Intent(requireActivity(), MapsActivity::class.java)
-            startActivity(intent)
-        }
         return root
     }
 
@@ -102,18 +96,21 @@ class HomeFragment : Fragment() {
 //        showRecyclerList()
     }
 
+
     private fun showLoading(state: Boolean) {
-        if (state) {
-            binding.progressBar.visibility = View.VISIBLE
-        } else {
-            binding.progressBar.visibility = View.GONE
-        }
+        binding.container.isRefreshing = state
     }
 
     private fun getAllRVData() {
+        if (_binding != null) {
+            showLoading(true)
+        }
         getPoints(homeViewModel)
         setUserHistory(homeViewModel)
         getList(homeViewModel)
+        if (_binding != null) {
+            showLoading(false)
+        }
     }
 
     override fun onDestroyView() {
@@ -125,6 +122,7 @@ class HomeFragment : Fragment() {
         ContextCompat.checkSelfPermission(requireContext(), it) == PackageManager.PERMISSION_GRANTED
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<String>,
@@ -142,60 +140,58 @@ class HomeFragment : Fragment() {
             }
         }
     }
+
     private fun showRecyclerList() {
-        binding.rvHome.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+        binding.rvHome.layoutManager =
+            LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
         binding.rvHome.adapter = adapter
     }
 
-    private fun getList(homeViewModel: HomeViewModel){
-        homeViewModel.getUserHistory().observe(requireActivity()){
-            showLoading(true)
-            if (it != null){
-                Log.d("UserHistory", it.toString())
-//                adapter = SetoranAdapter()
-                adapter.setList(it)
+    private fun getList(homeViewModel: HomeViewModel) {
+        homeViewModel.getUserHistory().observe(requireActivity()) { historyList ->
+            if (historyList.isNotEmpty()) {
+                val historyListReversed = historyList.reversed()
+                Log.d("UserHistory", historyList.toString())
+                adapter.setList(historyListReversed)
                 adapter.notifyDataSetChanged()
-                if (_binding != null){
-                    showLoading(false)
-                }
-            }else{
-                showLoading(false)
+            } else {
+                Toast.makeText(requireContext(), "Gagal Mengambil Data", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
-    private fun setUserHistory(homeViewModel: HomeViewModel){
+    private fun setUserHistory(homeViewModel: HomeViewModel) {
         val mUser = FirebaseAuth.getInstance().currentUser
         mUser!!.getIdToken(true)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     val idToken: String = task.result.token.toString()
-                    val token  = "Bearer $idToken"
+                    val token = "Bearer $idToken"
                     homeViewModel.setUserHistory(token)
-                    showLoading(false)
                 } else {
-                    showLoading(false)
                     Log.d("Exception", task.exception.toString())
                 }
             }
     }
 
-    private fun getPoints(homeViewModel: HomeViewModel){
-        showLoading(true)
+    private fun getPoints(homeViewModel: HomeViewModel) {
         val textView: TextView = binding.textHome
         val mUser = FirebaseAuth.getInstance().currentUser
         mUser!!.getIdToken(true)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     val idToken: String = task.result.token.toString()
-                    val token  = "Bearer $idToken"
+                    val token = "Bearer $idToken"
                     homeViewModel.getUserPoint(token)
-                    homeViewModel.point.observe(requireActivity()){
-                        if (it != null){
+                    homeViewModel.point.observe(requireActivity()) {
+                        if (it != null && _binding != null) {
                             textView.text = it.totalPoints.toString()
-                        }else{
-                            showLoading(false)
-                            Toast.makeText(requireContext(), "Gagal Mendapatkan Poin", Toast.LENGTH_SHORT).show()
+                        } else {
+                            Toast.makeText(
+                                requireContext(),
+                                "Gagal Mendapatkan Poin",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     }
 

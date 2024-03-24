@@ -10,7 +10,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.recyclops.databinding.FragmentPoinBinding
-import com.example.recyclops.ui.home.HomeViewModel
 import com.google.firebase.auth.FirebaseAuth
 
 class PoinFragment : Fragment() {
@@ -36,13 +35,18 @@ class PoinFragment : Fragment() {
 
         pointtv = binding.tvPoin
 
+        binding.container.setOnRefreshListener {
+            setPoints(pointViewModel)
+            getPoints(pointtv, pointViewModel)
+        }
+
         return root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setPoints(pointViewModel)
-        getPoints(pointtv,pointViewModel)
+        getPoints(pointtv, pointViewModel)
     }
 
     override fun onDestroyView() {
@@ -51,21 +55,17 @@ class PoinFragment : Fragment() {
     }
 
     private fun showLoading(state: Boolean) {
-        if (state) {
-            binding.progressBar.visibility = View.VISIBLE
-        } else {
-            binding.progressBar.visibility = View.GONE
-        }
+        binding.container.isRefreshing = state
     }
 
-    private fun setPoints(homeViewModel: PoinViewModel){
+    private fun setPoints(homeViewModel: PoinViewModel) {
         val mUser = FirebaseAuth.getInstance().currentUser
         mUser!!.getIdToken(true)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     showLoading(true)
                     val idToken: String = task.result.token.toString()
-                    val token  = "Bearer $idToken"
+                    val token = "Bearer $idToken"
                     homeViewModel.getUserPoint(token)
                 } else {
                     Log.d("Exception", task.exception.toString())
@@ -73,15 +73,19 @@ class PoinFragment : Fragment() {
             }
     }
 
-    private fun getPoints(textView: TextView, poinViewModel: PoinViewModel){
-        poinViewModel.point.observe(requireActivity()){
-            if (it != null){
+    private fun getPoints(textView: TextView, poinViewModel: PoinViewModel) {
+        poinViewModel.point.observe(requireActivity()) {
+            if (it != null) {
                 textView.text = it.totalPoints.toString()
-                if (_binding != null){
+                if (_binding != null) {
                     showLoading(false)
                 }
-            }else{
-                Toast.makeText(requireContext(), "Gagal Mendapatkan Poin", Toast.LENGTH_SHORT).show()
+            } else {
+                if (_binding != null) {
+                    showLoading(false)
+                }
+                Toast.makeText(requireContext(), "Gagal Mendapatkan Poin", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
     }

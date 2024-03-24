@@ -1,41 +1,45 @@
 package com.example.recyclops.ui.maps
 
 import android.content.pm.PackageManager
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import com.example.recyclops.R
 import com.example.recyclops.data.TrashBankLocation
-
+import com.example.recyclops.databinding.FragmentMapsBinding
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
-import com.example.recyclops.databinding.ActivityMapsBinding
 import com.google.android.gms.maps.model.LatLngBounds
+import com.google.android.gms.maps.model.MarkerOptions
 
-class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
+class MapsActivity : Fragment(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
-    private lateinit var binding: ActivityMapsBinding
+    private var _binding: FragmentMapsBinding? = null
+    private val binding get() = _binding!!
     private val boundsBuilder = LatLngBounds.Builder()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentMapsBinding.inflate(inflater, container, false)
+        mapFragment = childFragmentManager.findFragmentById(R.id.map) as? SupportMapFragment
+        mapFragment?.getMapAsync (this)
+        return binding.root
+    }
 
-        binding = ActivityMapsBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        val mapFragment = supportFragmentManager
-            .findFragmentById(R.id.map) as SupportMapFragment
-        mapFragment.getMapAsync(this)
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     /**
@@ -53,11 +57,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val indonesiaLocation = LatLng(-6.1753924, 106.8271528)
         val zoomLevel = 5.0f
 
-        //       Ui Settings
-        mMap.uiSettings.isZoomControlsEnabled = true
-
         //       Zoom in on Indonesia
-
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(indonesiaLocation, zoomLevel))
 
         //      Get the user's location if permission is granted
@@ -65,44 +65,49 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         //      Add markers for each trash bank location
         dummyMarkerAroundMe()
+
     }
 
     //    Create the options menu
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.map_options, menu)
-        return true
-    }
-
-    //    Handle the map type change
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (handleMapTypeChange(item)) {
-            return true
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
-    //    Change the map type based on the user's selection
-    private fun handleMapTypeChange(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.normal_type -> {
-                mMap.mapType = GoogleMap.MAP_TYPE_NORMAL
-                true
-            }
-            R.id.satellite_type -> {
-                mMap.mapType = GoogleMap.MAP_TYPE_SATELLITE
-                true
-            }
-            R.id.terrain_type -> {
-                mMap.mapType = GoogleMap.MAP_TYPE_TERRAIN
-                true
-            }
-            R.id.hybrid_type -> {
-                mMap.mapType = GoogleMap.MAP_TYPE_HYBRID
-                true
-            }
-            else -> false
-        }
-    }
+//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+//        inflater.inflate(R.menu.map_options, menu)
+//        super.onCreateOptionsMenu(menu, inflater)
+//    }
+//
+//    //    Handle the map type change
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        if (handleMapTypeChange(item)) {
+//            return true
+//        }
+//        return super.onOptionsItemSelected(item)
+//    }
+//
+//    //    Change the map type based on the user's selection
+//    private fun handleMapTypeChange(item: MenuItem): Boolean {
+//        return when (item.itemId) {
+//            R.id.normal_type -> {
+//                mMap.mapType = GoogleMap.MAP_TYPE_NORMAL
+//                true
+//            }
+//
+//            R.id.satellite_type -> {
+//                mMap.mapType = GoogleMap.MAP_TYPE_SATELLITE
+//                true
+//            }
+//
+//            R.id.terrain_type -> {
+//                mMap.mapType = GoogleMap.MAP_TYPE_TERRAIN
+//                true
+//            }
+//
+//            R.id.hybrid_type -> {
+//                mMap.mapType = GoogleMap.MAP_TYPE_HYBRID
+//                true
+//            }
+//
+//            else -> false
+//        }
+//    }
 
     //    Request permission to access the user's location
     private val requestPermissionLauncher =
@@ -117,7 +122,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     //    Get the user's location if permission is granted
     private fun getMyLocation() {
         if (ContextCompat.checkSelfPermission(
-                this.applicationContext,
+                this.requireContext(),
                 android.Manifest.permission.ACCESS_FINE_LOCATION
             ) == PackageManager.PERMISSION_GRANTED
         ) {
@@ -149,4 +154,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             boundsBuilder.include(bank.latLng)
         }
     }
+
+    companion object {
+        var mapFragment: SupportMapFragment? = null
+    }
+
 }
